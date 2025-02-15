@@ -8,6 +8,7 @@ labels: ''
 assignees: rscottlundgren
 
 ---
+
 # [PRE-PLANNING DISCOVERY] Short Descriptive Title
 
 ## Background / Context
