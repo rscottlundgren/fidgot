@@ -8,78 +8,55 @@ labels: ''
 assignees: rscottlundgren
 
 ---
+# [PRE-PLANNING DISCOVERY] Short Descriptive Title
 
-<!--
-This Discovery Ticket is designed to guide the initial planning and investigation phase.
-Please fill out each section with as much detail as available. Modify or remove sections as needed.
--->
+## Background / Context
+**Purpose:** _(Why is this discovery needed? What led to this investigation?)_
 
-# [Discovery] Short Descriptive Title
+**Relevant Links:** _(Links to prior research, documentation, or related issues)_
 
-## 1. Background / Context
-- **Purpose:**  
-  <!-- Why is this discovery needed? What led to this investigation? -->
-- **Relevant Links:**  
-  <!-- Links to prior research, documentation, or related issues -->
+## Motivation / Impact
+**Motivation:** _(Describe the problem and why it’s important to solve it)_
 
-## 2. Motivation / Impact
-- **Motivation:**  
-  <!-- Describe the problem and why it’s important to solve it -->
-- **Impact:**  
-  <!-- Who benefits? What are the expected improvements or outcomes? -->
+**Impact:** _(Who benefits? What are the expected improvements or outcomes?)_
 
-## 3. User Story Statement
-- **User Story:**  
-  <!-- Example: "As a [user], I want [feature] so that [benefit]." -->
+## User Story Statement
+**User Story:** _(Example: "As a [user], I want [feature] so that [benefit].")_
 
-## 4. Integrations / Dependencies
-- **Relevant Integrations/Dependencies:**  
-  <!-- List any third-party systems, APIs, or components involved -->
+## Integrations / Dependencies
+**Relevant Integrations/Dependencies:** _(List any third-party systems, APIs, or components involved)_
 
-## 5. User Interaction / Design / User Flow
-- **User Interaction / Flow:**  
-  <!-- Describe how users will interact with the feature -->
-- **Design Considerations:**  
-  <!-- Include sketches, wireframes, or design notes if available -->
+## User Interaction / Design / User Flow
+**User Interaction / Flow:** _(Describe how users will interact with the feature)_
 
-## 6. Functional Requirements
-<!-- 
-Definition: Functional Requirements are specific behaviors or functions the system must support.
-They describe what the system should do. Examples include:
-- "The system shall allow users to create an account."
-- "The system shall send a confirmation email upon registration."
--->
-- **Core Functionalities:**  
-  <!-- List the main features and behaviors expected. For each requirement, try to use clear, measurable statements. -->
+**Design Considerations:** _(Include sketches, wireframes, or design notes if available)_
 
-## 7. Non-Functional Requirements
-<!-- 
-Definition: Non-Functional Requirements describe the quality attributes or constraints on the system.
-They cover how the system performs a function rather than what it does. Examples include:
-- "The system should load the homepage within 2 seconds."
-- "The system must comply with GDPR for data privacy."
--->
-- **Performance, Security, Usability, etc.:**  
-  <!-- Specify requirements like load times, security protocols, accessibility standards, scalability, and reliability. -->
+## Functional Requirements
+> [!NOTE]
+> _Functional Requirements are specific behaviors or functions the system must support. They describe what the system should do. (e.g. "The system shall allow users to create an account.", "The system shall send a confirmation email upon registration.", etc.)_
+
+**Core Functionalities:** _(List the main features and behaviors expected. For each requirement, try to use clear, measurable statements.)_
+
+## Non-Functional Requirements
+> [!NOTE]
+> _Non-Functional Requirements describe the quality attributes or constraints on the system. They cover how the system performs a function rather than what it does. (e.g. "The system should load the homepage within 2 seconds.", "The system must comply with GDPR for data privacy.", etc.)_
+
+**Performance, Security, Usability, etc.:** _(Specify requirements like load times, security protocols, accessibility standards, scalability, and reliability.)_
 
 ## 8. Risks, Assumptions & Open Questions
-- **Risks:**  
-  <!-- Identify potential blockers or challenges -->
-- **Assumptions:**  
-  <!-- Note any assumptions that impact the design or feasibility -->
-- **Open Questions:**  
-  <!-- List questions that need further research -->
+**Risks:** _(Identify potential blockers or challenges)_
+
+**Assumptions:** _(Note any assumptions that impact the design or feasibility)_
+
+**Open Questions:** _(List questions that need further research)_
 
 ## 9. Developer Notes
-- **Technical Considerations:**  
-  <!-- Capture initial ideas, possible solutions, or architectural thoughts -->
+**Technical Considerations:** _(Capture initial ideas, possible solutions, or architectural thoughts)_
 
-## 10. QA / Testing Considerations
-- **Testing Ideas:**  
-  <!-- Describe initial thoughts on how to test and validate this feature -->
+## QA / Testing Considerations
+**Testing Ideas:** _(Describe initial thoughts on how to test and validate this feature)_
 
 ## 11. Success Criteria / Next Steps
-- **Success Criteria:**  
-  <!-- Define measurable outcomes or conditions for success -->
-- **Next Steps:**  
-  <!-- Outline the subsequent actions following this discovery phase -->
+**Success Criteria:** _(Define measurable outcomes or conditions for success)_
+
+**Next Steps:** _(Outline the subsequent actions following this discovery phase)_
