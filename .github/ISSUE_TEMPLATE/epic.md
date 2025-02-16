@@ -13,27 +13,28 @@ assignees: rscottlundgren
 ---
 
 # Overview
-**Description:** _(Provide a high-level summary of the epic. Explain what this epic covers and why it's important.)_
+**Description:** _(Provide a high-level summary of the Epic. Explain what this Epic covers and why it's important.)_
 
-**Objective:** _(What are the primary goals and expected outcomes for this epic?)_
+**Objective:** _(What are the primary goals and expected outcomes for this Epic?)_
 
 # Context & Motivation
-**Background:** _(Describe the context behind this epic. Include any relevant business drivers, market research, or technical considerations.)_
+**Background:** _(Describe the context behind this Epic. Include any relevant business drivers, market research, or technical considerations.)_
 
-**Motivation & Impact:** _(Explain why this epic is valuable. What problems does it solve, and how will it benefit users and/or the business?)_
+**Motivation & Impact:** _(Explain why this Epic is valuable. What problems does it solve, and how will it benefit users and/or the business?)_
 
 # Scope & Deliverables
-**In Scope:** _(List what is included in this epic. This may be high-level features or components.)_
+**In Scope:** _(List what is included in this Epic. This may be high-level features or components.)_
 
 **Out of Scope:** _(Define what is not included to avoid scope creep.)_
 
-**Deliverables:** _(What tangible outcomes are expected at the end of this epic?)_
+**Deliverables:** _(What tangible outcomes are expected at the end of this Epic?)_
 
 # User Stories / Features
 > [!TIP]
-> _Break down the epic into smaller, manageable user stories or features. You can link to related issues if they’ve been created._
+> _Break down the Epic into smaller, manageable user stories or features. You can link to related issues if they’ve been created._
 
 **Issues & User Stories:** _(Example: "As a [user], I want [feature] so that [benefit].")_
+
 - [ ] User Story 0
 - [ ] User Story 1
 - [ ] ...
@@ -43,30 +44,30 @@ assignees: rscottlundgren
 > [!NOTE]
 > _Functional Requirements describe what the system should do (e.g., "The system shall allow users to register via email.")._
 
-- Requirement 0
-- Requirement 1
-- ...
+- [ ] Requirement 0
+- [ ] Requirement 1
+- [ ] ...
 
 ## Non-Functional Requirements
 > [!NOTE]
 > _Non-Functional Requirements describe how the system performs a function (i.e., performance, security, scalability) (e.g., "The system should load within 2 seconds.", etc.)._
 
-- Requirement 0
-- Requirement 1
-- ...
+- [ ] Requirement 0
+- [ ] Requirement 1
+- [ ] ...
 
 # Timeline & Milestones
-**Milestones:** _(List key milestones or phases for this epic (e.g., "Design Complete", "MVP Release", "Final Testing"))_
+**Milestones:** _(List key milestones or phases for this Epic (e.g., "Design Complete", "MVP Release", "Final Testing"))_
 
 **Target Dates:** _(Include approximate dates if available)_
 
 # Dependencies & Risks
-**Dependencies:** _(Note any external factors or other epics/issues that this epic relies on.)_
+**Dependencies:** _(Note any external factors or other Bugs / Epics / Stories that this Epic relies on.)_
 
 **Risks & Mitigation:** _(Identify potential risks and proposed mitigation strategies.)_
 
 # Acceptance Criteria 
-_(List the conditions that must be met for this epic to be considered complete)_
+_(List the conditions that must be met for this Epic to be considered complete)_
 
 - [ ] Example Criterion 0
 - [ ] Example Criterion 1

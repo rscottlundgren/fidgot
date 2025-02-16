@@ -2,7 +2,7 @@
 name: Task
 about: Use this template to capture work items that require attention but don't necessarily
   represent user-facing features.
-title: "[TASK] - Enter Descriptive Title Here"
+title: "[TASK] - Enter A Clear, Concise Title For The Task"
 labels: ''
 assignees: rscottlundgren
 
@@ -19,6 +19,7 @@ _(Detail the technical work to be done, including context, file references, tech
 
 # Acceptance Criteria / Success Conditions
 _(Define clear, measurable conditions that must be met for this Task to be complete (e.g., "The code is refactored according to the new guidelines.", "Documentation is updated accordingly.").)_
+
 - [ ] Criterion 0
 - [ ] Criterion 1
 - [ ] ...
@@ -29,4 +30,6 @@ _(Define clear, measurable conditions that must be met for this Task to be compl
 **References:** _(Add any relevant links or screenshots that provide additional context)_
 
 # Related Issues / Dependencies
-**Related Issues:** _(Link to any related issues or dependencies that might affect this Task; you can link to another ticket by typing `#` then writing out the ticket number)_
+**Related Issues:** _(Link to any related issues that might affect this Task; you can link to another ticket by typing `#` then writing out the ticket number)_
+
+**Dependencies:** _(Link to any dependency issues that need to be completed prior to this Story; you can link to another ticket by typing `#` then writing out the ticket number)_
