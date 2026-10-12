@@ -1,0 +1,5 @@
+# Zed writes these itself; they are not configuration.
+# Prompt library database (LMDB: binary, with a lock file)
+prompts/
+# Backups made before edits
+*.bak-*

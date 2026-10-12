@@ -1,0 +1,63 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "cli_default_open_behavior": "new_window",
+  "agent_buffer_font_size": 11.0,
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
+  "base_keymap": "VSCode",
+  "icon_theme": "Zed (Default)",
+  "ui_font_size": 11.0,
+  "buffer_font_size": 11.0,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark",
+  },
+
+  // Column rulers: each language's community-standard line length.
+  // preferred_line_length matches, so `editor: rewrap` wraps to the same column.
+  // No global guide — languages without a convention (e.g. Go) show none.
+  "show_wrap_guides": true,
+  "languages": {
+    // PEP 8 (79). Black/Ruff format to 88 — second guide.
+    "Python": { "wrap_guides": [79, 88], "preferred_line_length": 79 },
+    // gofmt sets no limit; Go style guides say don't wrap for length.
+    "Go": { "wrap_guides": [] },
+    // Prettier default (80).
+    "JavaScript": { "wrap_guides": [80], "preferred_line_length": 80 },
+    "TypeScript": { "wrap_guides": [80], "preferred_line_length": 80 },
+    "TSX": { "wrap_guides": [80], "preferred_line_length": 80 },
+    "JSON": { "wrap_guides": [80], "preferred_line_length": 80 },
+    "JSONC": { "wrap_guides": [80], "preferred_line_length": 80 },
+    "HTML": { "wrap_guides": [80], "preferred_line_length": 80 },
+    "CSS": { "wrap_guides": [80], "preferred_line_length": 80 },
+    "YAML": { "wrap_guides": [80], "preferred_line_length": 80 },
+    // markdownlint MD013 (80).
+    "Markdown": { "wrap_guides": [80], "preferred_line_length": 80 },
+    // RuboCop default (120).
+    "Ruby": { "wrap_guides": [120], "preferred_line_length": 120 },
+    // Apple swift-format default (100).
+    "Swift": { "wrap_guides": [100], "preferred_line_length": 100 },
+    // clang-format LLVM/Google styles (80).
+    "C": { "wrap_guides": [80], "preferred_line_length": 80 },
+    "C++": { "wrap_guides": [80], "preferred_line_length": 80 },
+    // perltidy default (80); Perl Best Practices says 78.
+    "Perl": { "wrap_guides": [80], "preferred_line_length": 80 },
+    // Google Shell Style Guide (80).
+    "Shell Script": { "wrap_guides": [80], "preferred_line_length": 80 },
+    // Taplo default (80).
+    "TOML": { "wrap_guides": [80], "preferred_line_length": 80 },
+    // Common LaTeX convention (80).
+    "LaTeX": { "wrap_guides": [80], "preferred_line_length": 80 },
+  },
+}

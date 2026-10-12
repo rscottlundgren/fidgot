@@ -19,3 +19,20 @@
 | --- | --- | --- | --- | --- | --- |
 | ?? | [Starship](https://starship.rs/) | Homebrew | Homebrew | `brew install starship` | N / A |
 | ?? | [gh]() | Homebrew | Homebrew | `brew install gh` | N / A |
+
+# Config
+
+App configuration that lives in this repo and is linked into place.
+
+| Tool | In repo | Linked to | Restore on a new machine |
+| --- | --- | --- | --- |
+| Zed | `profiles/personal/zed/` (`settings.json`, `themes/`) | `~/.config/zed` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/zed ~/.config/zed` |
+
+The whole Zed folder is linked (not just `settings.json`) so Zed's own saves,
+which write a temp file and rename it, stay inside the repo instead of
+replacing a file-level link. Zed's prompt-library database and `*.bak-*`
+backups live there too but are git-ignored.
+
+Zed settings include per-language column rulers (`wrap_guides`) set to each
+language's community line length (PEP 8, Prettier, RuboCop, swift-format,
+clang-format, …); see the comments in `settings.json`.
