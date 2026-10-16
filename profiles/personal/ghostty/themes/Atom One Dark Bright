@@ -1,0 +1,27 @@
+# Atom One Dark with brighter default text (#abb2bf -> #d7dae0), for
+# readability over a transparent background. Copied from Ghostty's bundled
+# theme; only foreground, palette 7/15 and the selection colors differ.
+# Selection: a muted mustard (darker take on the theme's yellow #e5c07b) with
+# warm white text (6.25:1). Ghostty always draws the selection opaque.
+palette = 0=#21252b
+palette = 1=#e06c75
+palette = 2=#98c379
+palette = 3=#e5c07b
+palette = 4=#61afef
+palette = 5=#c678dd
+palette = 6=#56b6c2
+palette = 7=#d7dae0
+palette = 8=#767676
+palette = 9=#e06c75
+palette = 10=#98c379
+palette = 11=#e5c07b
+palette = 12=#61afef
+palette = 13=#c678dd
+palette = 14=#56b6c2
+palette = 15=#e6e8ec
+background = #21252b
+foreground = #d7dae0
+cursor-color = #abb2bf
+cursor-text = #21252b
+selection-background = #6b5f2e
+selection-foreground = #fffdf5

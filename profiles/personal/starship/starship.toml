@@ -1,6 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# Powerline prompt: one colored segment per group, warm reds through ambers
+# Two-line prompt: one colored segment per group, warm reds through ambers
 # to green, left to right. Rebuilt from the 2025-03-31 design notes
 # (obsidian-vaults daily-log/2025/03/20250331.md, "Starship Config").
 #
@@ -24,32 +24,26 @@
 # characters were added from Starship's gruvbox-rainbow preset, the layout
 # this design started from.
 #
-# Separators are always drawn (as in Starship's own powerline presets), so a
-# group with nothing to show (e.g. git outside a repo) appears as a thin
-# chevron in its color.
+# Flat blocks, no powerline arrows or end cap: with Ghostty's
+# background-opacity-cells, cell backgrounds are translucent but glyphs are
+# always opaque, so arrow shapes wouldn't match the segment bodies. A group
+# with nothing to show simply disappears.
 #
 # Icons need a Nerd Font; Ghostty bundles the symbols as a fallback.
 
 palette = 'fidgot'
 
 format = """
-[](saffronaut)\
 $os\
 $username\
-[](fg:saffronaut bg:rooibos_tea)\
 $hostname\
 $localip\
-[](fg:rooibos_tea bg:roux)\
 $sudo\
 $directory\
-[](fg:roux bg:mid_century_furniture)\
 $git_branch\
-[](fg:mid_century_furniture bg:caramel_coating)\
 $git_status\
-[](fg:caramel_coating bg:kalliene_yellow)\
 $git_commit\
 $git_state\
-[](fg:kalliene_yellow bg:militant_vegan)\
 $package\
 $c\
 $cpp\
@@ -75,20 +69,16 @@ $rust\
 $shell\
 $swift\
 $zig\
-[](fg:militant_vegan bg:deep_lagoon)\
 $docker_context\
 $container\
 $conda\
 $pixi\
-[](fg:deep_lagoon bg:harbor_blue)\
 $aws\
 $gcloud\
-[](fg:harbor_blue bg:midnight_ink)\
 $kubernetes\
 $terraform\
-[](fg:midnight_ink bg:plum_wine)\
 $time\
-[ ](fg:plum_wine)\
+[ ](fg:plum_wine)\
 $cmd_duration\
 $line_break\
 $character"""
@@ -190,9 +180,13 @@ format = '[ $symbol]($style)'
 style = 'bg:roux fg:albino'
 read_only_style = 'bg:roux fg:albino'
 read_only = ' 󰌾'
-truncation_length = 3
+truncation_length = 5
 truncation_symbol = '…/'
 format = '[ $path$read_only ]($style)'
+# Inside a repo: the repo's root folder in bold, e.g. …/fidgot/profiles.
+before_repo_root_style = 'bg:roux fg:albino'
+repo_root_style = 'bg:roux fg:albino bold'
+repo_root_format = '[ $before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path$read_only ]($style)'
 
 [directory.substitutions]
 "Documents" = "󰈙 "
@@ -210,9 +204,22 @@ format = '[ $symbol$branch(:$remote_branch) ]($style)'
 
 # --- 04 ----------------------------------------------------------------------
 
+# Nerd Font icons instead of !, +, ?, =, $, ⇡, ⇣, ⇕ (deleted ✘ and renamed »
+# keep Starship's defaults). Each icon carries its own trailing space so
+# several states don't run together; the format adds no space at the end.
 [git_status]
 style = 'bg:caramel_coating fg:soft_pillow'
-format = '([ $all_status$ahead_behind ]($style))'
+format = '([ $all_status$ahead_behind]($style))'
+modified = ' '  # cod-git_branch_changes
+staged = ' '  # cod-git_branch_staged_changes
+untracked = ' '  # oct-question
+conflicted = ' '  # cod-git_branch_conflicts
+stashed = ' '  # cod-git_stash
+ahead = ' '  # oct-arrow_up
+behind = ' '  # oct-arrow_down
+diverged = ' '  # oct-git_compare
+deleted = '✘ '
+renamed = '» '
 
 # --- 05 ----------------------------------------------------------------------
 
@@ -340,6 +347,7 @@ format = '[ $symbol($version) ]($style)'
 
 [shell]
 disabled = false
+zsh_indicator = ' zsh'  # dev-zsh icon + name
 style = 'bg:militant_vegan fg:soft_petals'
 format = '[ $indicator ]($style)'
 
@@ -413,7 +421,7 @@ time_format = '%R'
 style = 'bg:plum_wine fg:lavender_haze'
 format = '[  $time ]($style)'
 
-# --- after the ribbon ----------------------------------------------------------
+# --- after the segments --------------------------------------------------------
 
 [cmd_duration]
 format = '[󰔛 $duration]($style) '

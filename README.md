@@ -27,7 +27,7 @@ App configuration that lives in this repo and is linked into place.
 | Tool | In repo | Linked to | Restore on a new machine |
 | --- | --- | --- | --- |
 | Zed | `profiles/personal/zed/` (`settings.json`, `themes/`) | `~/.config/zed` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/zed ~/.config/zed` |
-| Ghostty | `profiles/personal/ghostty/` (`config.ghostty`) | `~/.config/ghostty` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/ghostty ~/.config/ghostty` |
+| Ghostty | `profiles/personal/ghostty/` (`config.ghostty`, `themes/`) | `~/.config/ghostty` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/ghostty ~/.config/ghostty` |
 | Starship | `profiles/personal/starship/starship.toml` | `~/.config/starship.toml` | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/starship/starship.toml ~/.config/starship.toml` |
 
 The whole Zed folder is linked (not just `settings.json`) so Zed's own saves,
@@ -39,11 +39,32 @@ Zed settings include per-language column rulers (`wrap_guides`) set to each
 language's community line length (PEP 8, Prettier, RuboCop, swift-format,
 clang-format, …); see the comments in `settings.json`.
 
-Ghostty also reads `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
-after the linked file, so keep that one absent or it overrides the repo.
-Ghostty stays transparent in fullscreen only in its own (non-native) mode:
-enter fullscreen with `cmd-enter`. The green button and `cmd-ctrl-F` use
-macOS native fullscreen, where Ghostty turns transparency off.
-Starship needs `eval "$(starship init zsh)"` in `~/.zshrc`; its prompt is a
-powerline ribbon whose segment colors are listed at the top of
-`starship.toml`.
+Ghostty:
+
+- It also reads `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
+  after the linked file, so keep that one absent or it overrides the repo.
+- The window is translucent (`background-opacity`, the one value to change).
+  `background-opacity-cells` applies the same opacity to highlighted lines,
+  diff colors and the Starship prompt segments. Text selection is the
+  exception: Ghostty always draws it solid, so it uses a muted mustard.
+- It stays transparent in fullscreen only in its own (non-native) mode: enter
+  fullscreen with `cmd-enter`. The green button and `cmd-ctrl-F` use macOS
+  native fullscreen, where Ghostty turns transparency off.
+- The themes are tuned copies of Ghostty's Atom One in `themes/`, for
+  readability over the translucent background: `Atom One Dark Bright`
+  (brighter text) and `Atom One Light Deep` (darker green/red/yellow), both
+  with the mustard selection. Ghostty finds them through the linked folder.
+- The font is CommitMono Nerd Font **Mono**, which fits every icon into one
+  cell so icons stay centered (the non-Mono variant draws some, like the
+  Apple logo, wider and off-center).
+
+Starship:
+
+- Needs `eval "$(starship init zsh)"` in `~/.zshrc`. Segment colors are listed
+  at the top of `starship.toml`.
+- Segments are flat blocks rather than powerline arrows: terminal glyphs are
+  always opaque, so arrow shapes can't match translucent segment bodies.
+- Git status uses Nerd Font icons; the comments above `[git_status]` say which
+  icon replaced which symbol.
+- Paths show up to 5 folders, counted from the repo root inside a repo, with
+  the repo name in bold.

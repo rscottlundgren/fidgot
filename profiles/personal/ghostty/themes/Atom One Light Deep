@@ -1,0 +1,25 @@
+# Atom One Light with darker green, red and yellow (palette 1/9, 2/10, 3/11)
+# so they stay readable over the translucent background, plus the same muted
+# mustard selection as the dark theme. Copied from Ghostty's bundled theme.
+palette = 0=#000000
+palette = 1=#d32c22
+palette = 2=#357e31
+palette = 3=#876b2f
+palette = 4=#2f5af3
+palette = 5=#950095
+palette = 6=#3f953a
+palette = 7=#bbbbbb
+palette = 8=#000000
+palette = 9=#d32c22
+palette = 10=#357e31
+palette = 11=#876b2f
+palette = 12=#2f5af3
+palette = 13=#a00095
+palette = 14=#3f953a
+palette = 15=#ffffff
+background = #f9f9f9
+foreground = #2a2c33
+cursor-color = #bbbbbb
+cursor-text = #ffffff
+selection-background = #6b5f2e
+selection-foreground = #fffdf5
