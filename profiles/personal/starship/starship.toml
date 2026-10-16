@@ -1,0 +1,430 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Powerline prompt: one colored segment per group, warm reds through ambers
+# to green, left to right. Rebuilt from the 2025-03-31 design notes
+# (obsidian-vaults daily-log/2025/03/20250331.md, "Starship Config").
+#
+#   00 os, username          saffronaut      / ballerina_gown
+#   01 hostname, localip     rooibos_tea     / voracious_white
+#   02 sudo, directory       roux            / albino
+#   03 git_branch            mid_century_furniture / pico_ivory
+#   04 git_status            caramel_coating / soft_pillow
+#   05 git_commit, git_state kalliene_yellow / down_feathers
+#   06 package, languages,   militant_vegan  / soft_petals
+#      shell
+#   07 docker, container,    deep_lagoon     / sea_foam        (added 2026-10-15)
+#      conda, pixi
+#   08 aws, gcloud           harbor_blue     / morning_mist    (added 2026-10-15)
+#   09 kubernetes, terraform midnight_ink    / paper_lantern   (added 2026-10-16)
+#   10 time                  plum_wine       / lavender_haze   (added 2026-10-15)
+#
+# 07-10 run from local to remote (this machine, cloud account, infrastructure)
+# and continue the gradient through teal, blue, indigo and purple.
+# 07, 10 and the cpp/bun/php/haskell modules, folder icons and vi-mode
+# characters were added from Starship's gruvbox-rainbow preset, the layout
+# this design started from.
+#
+# Separators are always drawn (as in Starship's own powerline presets), so a
+# group with nothing to show (e.g. git outside a repo) appears as a thin
+# chevron in its color.
+#
+# Icons need a Nerd Font; Ghostty bundles the symbols as a fallback.
+
+palette = 'fidgot'
+
+format = """
+[](saffronaut)\
+$os\
+$username\
+[](fg:saffronaut bg:rooibos_tea)\
+$hostname\
+$localip\
+[](fg:rooibos_tea bg:roux)\
+$sudo\
+$directory\
+[](fg:roux bg:mid_century_furniture)\
+$git_branch\
+[](fg:mid_century_furniture bg:caramel_coating)\
+$git_status\
+[](fg:caramel_coating bg:kalliene_yellow)\
+$git_commit\
+$git_state\
+[](fg:kalliene_yellow bg:militant_vegan)\
+$package\
+$c\
+$cpp\
+$daml\
+$dotnet\
+$golang\
+$haskell\
+$elixir\
+$elm\
+$erlang\
+$java\
+$kotlin\
+$lua\
+$nodejs\
+$bun\
+$odin\
+$ocaml\
+$perl\
+$php\
+$python\
+$ruby\
+$rust\
+$shell\
+$swift\
+$zig\
+[](fg:militant_vegan bg:deep_lagoon)\
+$docker_context\
+$container\
+$conda\
+$pixi\
+[](fg:deep_lagoon bg:harbor_blue)\
+$aws\
+$gcloud\
+[](fg:harbor_blue bg:midnight_ink)\
+$kubernetes\
+$terraform\
+[](fg:midnight_ink bg:plum_wine)\
+$time\
+[ ](fg:plum_wine)\
+$cmd_duration\
+$line_break\
+$character"""
+
+[palettes.fidgot]
+# 00
+saffronaut = '#922b21'
+ballerina_gown = '#f9ebea'
+# 01
+rooibos_tea = '#b03a2e'
+voracious_white = '#fdedec'
+# 02
+roux = '#a04000'
+albino = '#fbeee6'
+# 03
+mid_century_furniture = '#a85c19'  # was #af601a; darkened to 4.5:1 contrast
+pico_ivory = '#fdf2e9'
+# 04
+caramel_coating = '#9d650c'    # was #b9770e; darkened to 4.5:1 contrast
+soft_pillow = '#fef5e7'
+# 05
+kalliene_yellow = '#8a7008'    # was #b7950b; darkened to 4.5:1 contrast
+down_feathers = '#fef9e7'
+# 06
+militant_vegan = '#1d8148'     # was #239b56; darkened to 4.5:1 contrast
+soft_petals = '#eafaf1'
+# 07
+deep_lagoon = '#117864'
+sea_foam = '#e8f8f5'
+# 08
+harbor_blue = '#1f618d'
+morning_mist = '#eaf2f8'
+# 09
+midnight_ink = '#34418e'
+paper_lantern = '#eceef8'
+# 10
+plum_wine = '#6c3483'
+lavender_haze = '#f4ecf7'
+
+# --- 00 ----------------------------------------------------------------------
+
+[os]
+disabled = false
+style = 'bg:saffronaut fg:ballerina_gown'
+format = '[ $symbol]($style)'
+
+[os.symbols]
+Macos = " "
+Linux = " "
+Ubuntu = " "
+Debian = " "
+Amazon = " "
+Windows = "󰍲 "
+SUSE = " "
+Raspbian = " "
+Mint = " "
+Manjaro = " "
+Gentoo = " "
+Fedora = " "
+Alpine = " "
+Android = " "
+AOSC = " "
+Arch = " "
+Artix = " "
+EndeavourOS = " "
+CentOS = " "
+Redhat = "󱄛 "
+RedHatEnterprise = "󱄛 "
+Pop = " "
+
+# Shown only over SSH or as root.
+[username]
+style_user = 'bg:saffronaut fg:ballerina_gown'
+style_root = 'bg:saffronaut fg:ballerina_gown bold'
+format = '[$user ]($style)'
+
+# --- 01 ----------------------------------------------------------------------
+
+# Shown only over SSH.
+[hostname]
+style = 'bg:rooibos_tea fg:voracious_white'
+format = '[ $ssh_symbol$hostname]($style)'
+
+[localip]
+disabled = false
+ssh_only = false
+style = 'bg:rooibos_tea fg:voracious_white'
+format = '[ $localipv4 ]($style)'
+
+# --- 02 ----------------------------------------------------------------------
+
+[sudo]
+disabled = false
+symbol = '󰌋 '
+style = 'bg:roux fg:albino'
+format = '[ $symbol]($style)'
+
+[directory]
+style = 'bg:roux fg:albino'
+read_only_style = 'bg:roux fg:albino'
+read_only = ' 󰌾'
+truncation_length = 3
+truncation_symbol = '…/'
+format = '[ $path$read_only ]($style)'
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+# --- 03 ----------------------------------------------------------------------
+
+[git_branch]
+symbol = ' '
+style = 'bg:mid_century_furniture fg:pico_ivory'
+format = '[ $symbol$branch(:$remote_branch) ]($style)'
+
+# --- 04 ----------------------------------------------------------------------
+
+[git_status]
+style = 'bg:caramel_coating fg:soft_pillow'
+format = '([ $all_status$ahead_behind ]($style))'
+
+# --- 05 ----------------------------------------------------------------------
+
+[git_commit]
+tag_symbol = '  '
+style = 'bg:kalliene_yellow fg:down_feathers'
+format = '[ $hash$tag ]($style)'
+
+[git_state]
+style = 'bg:kalliene_yellow fg:down_feathers'
+format = '[ $state( $progress_current/$progress_total) ]($style)'
+
+# --- 06 ----------------------------------------------------------------------
+# Shared look for every language module: symbol plus version. package (the
+# project's own version) leads the segment.
+
+[package]
+symbol = '󰏗 '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol$version ]($style)'
+
+[c]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[cpp]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[daml]
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[dotnet]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[golang]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[haskell]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[elixir]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[elm]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[erlang]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[java]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[kotlin]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[lua]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[nodejs]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[bun]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[odin]
+symbol = '󰟢 '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[ocaml]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[perl]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[php]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[python]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version)( \($virtualenv\)) ]($style)'
+
+[ruby]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[rust]
+symbol = '󱘗 '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[shell]
+disabled = false
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $indicator ]($style)'
+
+[swift]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+[zig]
+symbol = ' '
+style = 'bg:militant_vegan fg:soft_petals'
+format = '[ $symbol($version) ]($style)'
+
+# --- 07 ----------------------------------------------------------------------
+
+[docker_context]
+symbol = ' '
+style = 'bg:deep_lagoon fg:sea_foam'
+format = '[ $symbol$context ]($style)'
+
+[container]
+symbol = ' '
+style = 'bg:deep_lagoon fg:sea_foam'
+format = '[ $symbol$name ]($style)'
+
+[conda]
+symbol = ' '
+style = 'bg:deep_lagoon fg:sea_foam'
+format = '[ $symbol$environment ]($style)'
+
+[pixi]
+symbol = '󰏗 '
+style = 'bg:deep_lagoon fg:sea_foam'
+format = '[ $symbol($version)( $environment) ]($style)'
+
+# --- 08 ----------------------------------------------------------------------
+
+[aws]
+symbol = ' '
+style = 'bg:harbor_blue fg:morning_mist'
+format = '[ $symbol($profile)( \($region\)) ]($style)'
+
+[gcloud]
+symbol = '󱇶 '
+style = 'bg:harbor_blue fg:morning_mist'
+format = '[ $symbol$account(@$domain)( \($region\)) ]($style)'
+
+# --- 09 ----------------------------------------------------------------------
+
+# Off by default in Starship; on here, but only in folders that look like
+# Kubernetes work, so a leftover kubeconfig doesn't follow every prompt.
+[kubernetes]
+disabled = false
+symbol = '󱃾 '
+detect_folders = ['k8s', 'kubernetes', 'manifests', 'charts']
+detect_files = ['kustomization.yaml', 'Chart.yaml', 'helmfile.yaml', 'skaffold.yaml']
+style = 'bg:midnight_ink fg:paper_lantern'
+format = '[ $symbol$context( \($namespace\)) ]($style)'
+
+# Shows in Terraform folders (.terraform/ or *.tf files).
+[terraform]
+symbol = ' '
+style = 'bg:midnight_ink fg:paper_lantern'
+format = '[ $symbol$workspace ]($style)'
+
+# --- 10 ----------------------------------------------------------------------
+
+[time]
+disabled = false
+time_format = '%R'
+style = 'bg:plum_wine fg:lavender_haze'
+format = '[  $time ]($style)'
+
+# --- after the ribbon ----------------------------------------------------------
+
+[cmd_duration]
+format = '[󰔛 $duration]($style) '
+style = 'fg:yellow'
+
+# Theme (ANSI) colors rather than the palette: the palette's dark shades are
+# hard to read on a dark background, and Ghostty switches light/dark.
+[character]
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:green)'
+vimcmd_replace_one_symbol = '[❮](bold fg:purple)'
+vimcmd_replace_symbol = '[❮](bold fg:purple)'
+vimcmd_visual_symbol = '[❮](bold fg:yellow)'

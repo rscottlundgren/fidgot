@@ -27,6 +27,8 @@ App configuration that lives in this repo and is linked into place.
 | Tool | In repo | Linked to | Restore on a new machine |
 | --- | --- | --- | --- |
 | Zed | `profiles/personal/zed/` (`settings.json`, `themes/`) | `~/.config/zed` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/zed ~/.config/zed` |
+| Ghostty | `profiles/personal/ghostty/` (`config.ghostty`) | `~/.config/ghostty` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/ghostty ~/.config/ghostty` |
+| Starship | `profiles/personal/starship/starship.toml` | `~/.config/starship.toml` | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/starship/starship.toml ~/.config/starship.toml` |
 
 The whole Zed folder is linked (not just `settings.json`) so Zed's own saves,
 which write a temp file and rename it, stay inside the repo instead of
@@ -36,3 +38,9 @@ backups live there too but are git-ignored.
 Zed settings include per-language column rulers (`wrap_guides`) set to each
 language's community line length (PEP 8, Prettier, RuboCop, swift-format,
 clang-format, …); see the comments in `settings.json`.
+
+Ghostty also reads `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
+after the linked file, so keep that one absent or it overrides the repo.
+Starship needs `eval "$(starship init zsh)"` in `~/.zshrc`; its prompt is a
+powerline ribbon whose segment colors are listed at the top of
+`starship.toml`.
