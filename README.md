@@ -41,6 +41,9 @@ clang-format, …); see the comments in `settings.json`.
 
 Ghostty also reads `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
 after the linked file, so keep that one absent or it overrides the repo.
+Ghostty stays transparent in fullscreen only in its own (non-native) mode:
+enter fullscreen with `cmd-enter`. The green button and `cmd-ctrl-F` use
+macOS native fullscreen, where Ghostty turns transparency off.
 Starship needs `eval "$(starship init zsh)"` in `~/.zshrc`; its prompt is a
 powerline ribbon whose segment colors are listed at the top of
 `starship.toml`.

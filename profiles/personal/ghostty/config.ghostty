@@ -17,16 +17,17 @@ font-size = 11
 # for a little air between the prompt's two lines.
 adjust-cell-height = 20%
 
-background-opacity = 0.8
-background-blur = true
+background-opacity = 0.75
+background-blur = false
 
 window-padding-x = 8
 window-padding-y = 6
 window-padding-balance = true
 
 # Ghostty's own fullscreen, so the transparency above survives fullscreen
-# (native macOS fullscreen turns it off). Tabs don't carry over: only the
-# focused tab goes fullscreen, the rest stay in a normal window.
+# (native macOS fullscreen turns it off). Enter it with cmd-enter: the green
+# button and cmd-ctrl-F still use native (opaque) fullscreen. Tabs don't carry
+# over: only the focused tab goes fullscreen, the rest stay in a normal window.
 macos-non-native-fullscreen = true
 
 # --- Behavior -----------------------------------------------------------------
