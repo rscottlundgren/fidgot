@@ -51,6 +51,7 @@ brew "prettier"
 brew "markdownlint-cli2"
 brew "openspec"
 brew "poppler" # PDF command-line tools (pdftotext, pdfinfo, ...)
+brew "mas" # Mac App Store CLI, for the mas lines below
 
 # LaTeX
 cask "mactex"
@@ -90,6 +91,9 @@ cask "spotify"
 cask "brainfm"
 cask "google-chrome"
 cask "firefox@developer-edition"
+
+# Mac App Store apps (need the App Store app signed in to an Apple Account)
+mas "Due", id: 524373870
 
 # ArtCraft apps (each its own cask)
 cask "artcraft" # video crafting engine

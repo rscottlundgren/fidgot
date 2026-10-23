@@ -22,6 +22,11 @@ cat profiles/*/Brewfile | brew bundle cleanup --file=-
 
 Notes:
 
+- App Store apps (the `mas` lines) install with
+  [`mas`](https://github.com/mas-cli/mas), which needs the App Store app signed
+  in to an Apple Account. If it isn't, `install.sh` finishes anyway and lists
+  the Brewfile under "Left for you". Find an app's id with `mas search <name>`
+  or `mas list`.
 - Docker comes from OrbStack, which includes the Docker CLI, `docker compose`
   and `docker buildx`. Homebrew's `docker` formula is left out on purpose:
   OrbStack would defer to it, and it needs separate Compose and buildx formulas.
