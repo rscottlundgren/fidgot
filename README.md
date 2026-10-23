@@ -40,6 +40,8 @@ Notes:
   machine, after `brew bundle install`: `rustup default stable` and
   `rustup component add rust-analyzer`. Update with `rustup update`. Don't also
   install Homebrew's `rust` formula; it's a separate toolchain that conflicts.
+- Zig and its language server, ZLS, both come from Homebrew. ZLS has to be the
+  same release as Zig, so upgrade them together: `brew upgrade zig zls`.
 
 Installed outside Homebrew:
 
