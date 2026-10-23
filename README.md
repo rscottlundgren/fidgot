@@ -104,9 +104,13 @@ Neovim:
   files in no fixed order and would load these modules a second time.
 - `.luarc.json` points lua-language-server at the Neovim runtime and the
   installed plugins, so editors other than Neovim (e.g. Zed) know about the
-  `vim` global and plugin types. Neovim's own `lua_ls` reads it too. The
-  runtime path, `/opt/homebrew/share/nvim/runtime`, assumes Homebrew on Apple
-  Silicon; change it on a machine where `:echo $VIMRUNTIME` is elsewhere.
+  `vim` global and plugin types. lua-language-server reads it only from the
+  workspace root, so there are copies in two places, kept identical:
+  `profiles/common/nvim/.luarc.json` (Neovim's own `lua_ls`, or that folder
+  opened alone) and the repo root (the whole repo opened, as in Zed). Zed also
+  gets the same settings from the repo's `.zed/settings.json`. The runtime
+  path, `/opt/homebrew/share/nvim/runtime`, assumes Homebrew on Apple Silicon;
+  change it in all three on a machine where `:echo $VIMRUNTIME` is elsewhere.
 - Machine-specific settings (work hostnames, paths, anything not for a public
   repo) go in `lua/custom/local.lua`. It's git-ignored, and `init.lua` loads it
   only if it exists.
