@@ -26,6 +26,10 @@ brew "unzip"
 
 # Languages and tooling
 brew "go"
+brew "gopls" # Go language server
+brew "goimports"
+brew "gofumpt"
+brew "golangci-lint"
 brew "rustup" # toolchains: rustup default stable; rustup component add rust-analyzer
 brew "zig"
 brew "zls" # Zig language server; must match Zig's release (upgrade together)
