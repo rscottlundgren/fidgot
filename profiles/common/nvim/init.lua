@@ -111,6 +111,7 @@ require 'custom.languages.latex'
 require 'custom.languages.java'
 require 'custom.languages.web'
 require 'custom.languages.data'
+require 'custom.languages.rust'
 
 -- ============================================================
 -- SECTION 10: OPTIONAL EXAMPLES / NEXT STEPS

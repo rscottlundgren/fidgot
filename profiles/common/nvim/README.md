@@ -70,6 +70,7 @@
   | `java.lua`                           | jdtls (type checking needs a project root: `.git`, `pom.xml`, `build.gradle`, …)             | google-java-format                                              | jdtls                                     |
   | `web.lua` (HTML, CSS, SCSS, Less)    | html, cssls (vscode-langservers-extracted)                                                   | Prettier                                                        | cssls (CSS validation)                    |
   | `data.lua` (JSON, JSONC, YAML, TOML) | jsonls, yamlls (schemas from SchemaStore.nvim), taplo                                        | Prettier (JSON, YAML); taplo (TOML)                             | the language servers (schema validation)  |
+  | `rust.lua`                           | rust-analyzer (from the rustup toolchain)                                                    | rustfmt                                                         | clippy (through rust-analyzer, on save)   |
 
 - Nerd Font icons are on (`vim.g.have_nerd_font = true` in
   `lua/custom/config/options.lua`): kickstart then loads mini.icons (also
