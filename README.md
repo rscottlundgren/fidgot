@@ -1,28 +1,30 @@
-## Git
+# fidgot
 
-# Casks
+My dotfiles and app config, shared across machines.
 
-| Seq | Tool                        | Installed By | Managed By      | Install Command                                  | Notes |
-| --- | --------------------------- | ------------ | --------------- | ------------------------------------------------ | ----- |
-| ??  | [WhatsApp](<>)              | Homebrew     | Homebrew + Self | `brew install --cask whatsapp`                   | N / A |
-| ??  | [Ghostty](<>)               | Homebrew     | Homebrew + Self | `brew install --cask ghostty`                    | N / A |
-| ??  | [Zoom](<>)                  | Homebrew     | Homebrew + Self | `brew install --cask zoom`                       | N / A |
-| ??  | [VS Code](<>)               | Homebrew     | Homebrew + Self | `brew install --cask visual-studio-code`         | N / A |
-| ??  | [Zed](<>)                   | Homebrew     | Homebrew + Self | `brew install --cask zed`                        | N / A |
-| ??  | [Nerd Font: CommitMono](<>) | Homebrew     | Homebrew        | `brew install --cask font-commit-mono-nerd-font` | N / A |
-| ??  | [Nerd Font: GeistMono](<>)  | Homebrew     | Homebrew        | `brew install --cask font-geist-mono-nerd-font`  | N / A |
-| ??  | [Nerd Font: ZedMono](<>)    | Homebrew     | Homebrew        | `brew install --cask font-zed-mono-nerd-font`    | N / A |
+## Casks
 
-# Formulae
+| Seq | Tool                                                | Installed By | Managed By      | Install Command                                  | Notes |
+| --- | --------------------------------------------------- | ------------ | --------------- | ------------------------------------------------ | ----- |
+| ??  | [WhatsApp](https://www.whatsapp.com/)               | Homebrew     | Homebrew + Self | `brew install --cask whatsapp`                   | N / A |
+| ??  | [Ghostty](https://ghostty.org/)                     | Homebrew     | Homebrew + Self | `brew install --cask ghostty`                    | N / A |
+| ??  | [Zoom](https://zoom.us/)                            | Homebrew     | Homebrew + Self | `brew install --cask zoom`                       | N / A |
+| ??  | [VS Code](https://code.visualstudio.com/)           | Homebrew     | Homebrew + Self | `brew install --cask visual-studio-code`         | N / A |
+| ??  | [Zed](https://zed.dev/)                             | Homebrew     | Homebrew + Self | `brew install --cask zed`                        | N / A |
+| ??  | [Nerd Font: CommitMono](https://www.nerdfonts.com/) | Homebrew     | Homebrew        | `brew install --cask font-commit-mono-nerd-font` | N / A |
+| ??  | [Nerd Font: GeistMono](https://www.nerdfonts.com/)  | Homebrew     | Homebrew        | `brew install --cask font-geist-mono-nerd-font`  | N / A |
+| ??  | [Nerd Font: ZedMono](https://www.nerdfonts.com/)    | Homebrew     | Homebrew        | `brew install --cask font-zed-mono-nerd-font`    | N / A |
+
+## Formulae
 
 | Seq | Tool                                                                 | Installed By | Managed By | Install Command                  | Notes                                |
 | --- | -------------------------------------------------------------------- | ------------ | ---------- | -------------------------------- | ------------------------------------ |
 | ??  | [Starship](https://starship.rs/)                                     | Homebrew     | Homebrew   | `brew install starship`          | N / A                                |
-| ??  | [gh](<>)                                                             | Homebrew     | Homebrew   | `brew install gh`                | N / A                                |
+| ??  | [gh](https://cli.github.com/)                                        | Homebrew     | Homebrew   | `brew install gh`                | N / A                                |
 | ??  | [Prettier](https://prettier.io/)                                     | Homebrew     | Homebrew   | `brew install prettier`          | Formats Markdown; see Markdown below |
 | ??  | [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2) | Homebrew     | Homebrew   | `brew install markdownlint-cli2` | Lints Markdown; see Markdown below   |
 
-# Config
+## Config
 
 App configuration that lives in this repo and is linked into place. It's grouped
 into profiles by which machines use it:
@@ -154,7 +156,7 @@ Neovim:
   file for that section (table above). Changes under `lua/kickstart/` copy over
   as-is. Then write the clone's `git rev-parse HEAD` into `.kickstart-synced`.
 
-# Third-party clones
+## Third-party clones
 
 Clones of other people's repos live at
 `~/git/github/<account>/_third-party/<owner>/<repo>` (for example
@@ -162,7 +164,7 @@ Clones of other people's repos live at
 projects. Keeping them under the account folder means that account's git
 identity still applies. The leading `_` sorts the folder first.
 
-# Markdown
+## Markdown
 
 Markdown is formatted with Prettier and linted with markdownlint-cli2, using
 config at the repo root, so Neovim, Zed and the command line agree:
