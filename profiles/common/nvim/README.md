@@ -40,10 +40,6 @@
   | `lua/custom/plugins/lint.lua`     | [nvim-lint](https://github.com/mfussenegger/nvim-lint): runs markdownlint-cli2 on Markdown buffers                                                                                                                                               |
   | `lua/custom/plugins/debug.lua`    | kickstart's debug module without Mason: [nvim-dap](https://github.com/mfussenegger/nvim-dap), nvim-dap-ui, nvim-dap-go; delve from Homebrew. F5 start/continue, F1/F2/F3 step into/over/out, F7 toggle UI, `<leader>b` / `<leader>B` breakpoints |
 
-  Markdown is also formatted with Prettier on save and with `<leader>f`
-  (`formatters_by_ft` and `format_on_save` in
-  `lua/custom/plugins/formatting.lua`).
-
 - `.luarc.json` points lua-language-server at the Neovim runtime and the
   installed plugins, so editors other than Neovim (e.g. Zed) know about the
   `vim` global and plugin types. lua-language-server reads it only from the
@@ -68,18 +64,19 @@
   shell share them; Mason only installs what kickstart's `lsp.lua` lists
   (`lua_ls`, `stylua`).
 
-  | Module                               | Language server                                                                                             | Formatters                                                      | Linters                                   |
-  | ------------------------------------ | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------- |
-  | `go.lua`                             | gopls                                                                                                       | goimports, then gofumpt                                         | golangci-lint                             |
-  | `typescript.lua`                     | vtsls; ESLint in projects with an ESLint config                                                             | Prettier (a project's own, if installed)                        | ESLint (through its language server)      |
-  | `python.lua`                         | basedpyright (type checking `standard`); Ruff                                                               | Ruff: organize imports, then format                             | Ruff (through its language server)        |
-  | `shell.lua` (sh, bash; not zsh)      | bash-language-server                                                                                        | shfmt, 2-space indent unless the project has an `.editorconfig` | shellcheck (through bash-language-server) |
-  | `latex.lua`                          | texlab: build with latexmk (`:LspTexlabBuild`), forward search to Skim (`:LspTexlabForward`)                | tex-fmt                                                         | chktex on save (through texlab)           |
-  | `java.lua`                           | jdtls (type checking needs a project root: `.git`, `pom.xml`, `build.gradle`, …)                            | google-java-format                                              | jdtls                                     |
-  | `web.lua` (HTML, CSS, SCSS, Less)    | html, cssls (vscode-langservers-extracted)                                                                  | Prettier                                                        | cssls (CSS validation)                    |
-  | `data.lua` (JSON, JSONC, YAML, TOML) | jsonls, yamlls (schemas from SchemaStore.nvim), taplo                                                       | Prettier (JSON, YAML); taplo (TOML)                             | the language servers (schema validation)  |
-  | `rust.lua`                           | rust-analyzer (from the rustup toolchain)                                                                   | rustfmt                                                         | clippy (through rust-analyzer, on save)   |
-  | `zig.lua`                            | zls (syntax errors as you type; compile errors on save when `build.zig` has a `check` step, see the module) | `zig fmt`                                                       | zls                                       |
+  | Module                                                                         | Language server                                                                                             | Formatters                                                      | Linters                                   |
+  | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------- |
+  | Markdown (`markdown.lua`, `lint.lua`, `formatting.lua`; not a language module) | none; render-markdown.nvim renders it in the buffer                                                         | Prettier, on save too (`format_on_save` in `formatting.lua`)    | markdownlint-cli2 (nvim-lint)             |
+  | `go.lua`                                                                       | gopls                                                                                                       | goimports, then gofumpt                                         | golangci-lint                             |
+  | `typescript.lua`                                                               | vtsls; ESLint in projects with an ESLint config                                                             | Prettier (a project's own, if installed)                        | ESLint (through its language server)      |
+  | `python.lua`                                                                   | basedpyright (type checking `standard`); Ruff                                                               | Ruff: organize imports, then format                             | Ruff (through its language server)        |
+  | `shell.lua` (sh, bash; not zsh)                                                | bash-language-server                                                                                        | shfmt, 2-space indent unless the project has an `.editorconfig` | shellcheck (through bash-language-server) |
+  | `latex.lua`                                                                    | texlab: build with latexmk (`:LspTexlabBuild`), forward search to Skim (`:LspTexlabForward`)                | tex-fmt                                                         | chktex on save (through texlab)           |
+  | `java.lua`                                                                     | jdtls (type checking needs a project root: `.git`, `pom.xml`, `build.gradle`, …)                            | google-java-format                                              | jdtls                                     |
+  | `web.lua` (HTML, CSS, SCSS, Less)                                              | html, cssls (vscode-langservers-extracted)                                                                  | Prettier                                                        | cssls (CSS validation)                    |
+  | `data.lua` (JSON, JSONC, YAML, TOML)                                           | jsonls, yamlls (schemas from SchemaStore.nvim), taplo                                                       | Prettier (JSON, YAML); taplo (TOML)                             | the language servers (schema validation)  |
+  | `rust.lua`                                                                     | rust-analyzer (from the rustup toolchain)                                                                   | rustfmt                                                         | clippy (through rust-analyzer, on save)   |
+  | `zig.lua`                                                                      | zls (syntax errors as you type; compile errors on save when `build.zig` has a `check` step, see the module) | `zig fmt`                                                       | zls                                       |
 
 - Nerd Font icons are on (`vim.g.have_nerd_font = true` in
   `lua/custom/config/options.lua`): kickstart then loads mini.icons (also
