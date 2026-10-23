@@ -95,8 +95,12 @@ if ! skipped brew; then
     if command -v brew >/dev/null && brew bundle check --file "$f" >/dev/null 2>&1; then
       note "everything installed"
     else
-      # Install what's missing; don't upgrade what's already there
-      HOMEBREW_BUNDLE_NO_UPGRADE=1 run brew bundle install --file "$f"
+      # Install what's missing; don't upgrade what's already there. App Store
+      # apps (the mas lines) fail until the App Store app is signed in, so a
+      # failure here is left for you instead of stopping the install.
+      if ! HOMEBREW_BUNDLE_NO_UPGRADE=1 run brew bundle install --file "$f"; then
+        manual+=("Brewfile ${f#"$repo"/}: some installs failed; App Store apps need the App Store app signed in to an Apple Account. Then: brew bundle install --file ${f#"$repo"/}")
+      fi
     fi
   done
 fi
