@@ -98,6 +98,11 @@ Settings that apply to working on this repo itself, at the repo root:
   Neovim runtime when the whole repo is open in an editor such as Zed (see
   [Neovim](profiles/common/nvim/README.md)).
 
+Tests for the scripts, shell and Neovim config are in
+[`tests/`](tests/README.md): run `tests/run.sh` before committing (it includes
+the Markdown checks below), or `tests/run.sh --slow` after changing a language
+module.
+
 Check Markdown before committing:
 
 ```sh

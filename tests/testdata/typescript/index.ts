@@ -1,0 +1,2 @@
+const n : number = "a"
+export  {n}
