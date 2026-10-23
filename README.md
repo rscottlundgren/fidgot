@@ -81,6 +81,11 @@ tool.
 
 Settings that apply to working on this repo itself, at the repo root:
 
+- `.editorconfig`: UTF-8, LF line endings, a final newline, no trailing
+  whitespace and 2-space indents everywhere (tabs in git config files). Zed,
+  Neovim and VS Code read it, as do shfmt (so shell scripts get 2 spaces) and
+  Prettier; it mostly matters for files no formatter covers, like the Brewfiles,
+  zsh and Ghostty config.
 - `.prettierrc`: Prettier formats Markdown with prose wrapped at 80 columns
   (`proseWrap: "always"`), and JSONC (`*.jsonc` and Zed's `settings.json` files)
   with trailing commas, as Zed writes them. Zed's built-in Prettier reads it
