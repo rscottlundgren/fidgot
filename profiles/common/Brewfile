@@ -38,6 +38,7 @@ brew "ruff" # Python linter and formatter
 brew "bash-language-server"
 brew "shellcheck" # shell linter (used by bash-language-server)
 brew "shfmt" # shell formatter
+brew "stylua" # Lua formatter (Neovim uses Mason's; this is for the shell)
 brew "openjdk" # Java JDK (keg-only; zshrc puts it on PATH and sets JAVA_HOME)
 brew "jdtls" # Java language server
 brew "google-java-format"

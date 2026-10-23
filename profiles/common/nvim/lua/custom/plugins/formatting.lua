@@ -12,7 +12,7 @@ require('conform').setup {
   format_on_save = function(bufnr)
     -- You can specify filetypes to autoformat on save here:
     local enabled_filetypes = {
-      -- lua = true,
+      lua = true,
       -- python = true,
       markdown = true,
     }
@@ -27,6 +27,7 @@ require('conform').setup {
   },
   -- You can also specify external formatters in here.
   formatters_by_ft = {
+    lua = { 'stylua' }, -- stylua from Mason; reads .stylua.toml
     markdown = { 'prettier' }, -- Prettier from Homebrew; reads the repo's .prettierrc
     -- rust = { 'rustfmt' },
     -- Conform can also run multiple formatters sequentially
