@@ -99,6 +99,7 @@ require 'custom.plugins.formatting' -- Section 7
 require 'custom.plugins.completion' -- Section 8
 require 'custom.plugins.treesitter' -- Section 9
 require 'custom.plugins.markdown' -- not from upstream (render-markdown.nvim)
+require 'custom.plugins.lint' -- not from upstream (nvim-lint)
 
 -- ============================================================
 -- SECTION 10: OPTIONAL EXAMPLES / NEXT STEPS

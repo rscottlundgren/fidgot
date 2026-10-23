@@ -1,0 +1,16 @@
+// markdownlint-cli2 config for the whole repo (CLI, and Neovim via nvim-lint).
+// https://github.com/DavidAnson/markdownlint-cli2
+{
+  "config": {
+    // Turn off rules that conflict with Prettier, which formats Markdown here.
+    "extends": "markdownlint/style/prettier",
+    // Line length 80 (matches the Zed rulers). Prettier wraps prose; code
+    // blocks and tables can't be wrapped, so they're exempt.
+    "MD013": { "line_length": 80, "code_blocks": false, "tables": false },
+    // Collapsible sections (<details><summary>) are fine; other HTML still warns.
+    "MD033": { "allowed_elements": ["details", "summary"] },
+  },
+  // Neovim help files (Vim help format, not Markdown) and local session notes
+  // (.context/ is git-excluded via .git/info/exclude, not .gitignore)
+  "ignores": ["profiles/common/nvim/doc/**", ".context/**"],
+}
