@@ -40,6 +40,8 @@ brew "shfmt" # shell formatter
 brew "openjdk" # Java JDK (keg-only; zshrc puts it on PATH and sets JAVA_HOME)
 brew "jdtls" # Java language server
 brew "google-java-format"
+brew "yaml-language-server"
+brew "taplo" # TOML language server and formatter
 brew "rustup" # toolchains: rustup default stable; rustup component add rust-analyzer
 brew "zig"
 brew "zls" # Zig language server; must match Zig's release (upgrade together)

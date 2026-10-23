@@ -110,6 +110,7 @@ require 'custom.languages.shell'
 require 'custom.languages.latex'
 require 'custom.languages.java'
 require 'custom.languages.web'
+require 'custom.languages.data'
 
 -- ============================================================
 -- SECTION 10: OPTIONAL EXAMPLES / NEXT STEPS

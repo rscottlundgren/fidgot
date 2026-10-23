@@ -95,7 +95,8 @@ Markdown is formatted with Prettier and linted with markdownlint-cli2, using
 config at the repo root, so Neovim, Zed and the command line agree:
 
 - `.prettierrc`: wrap prose at 80 columns (`proseWrap: "always"`). Zed's
-  built-in Prettier reads it.
+  built-in Prettier reads it. It also formats JSONC (`*.jsonc` and Zed's
+  `settings.json` files) with trailing commas, as Zed writes them.
 - `.markdownlint-cli2.jsonc`: markdownlint's Prettier style (turns off rules
   that conflict with Prettier) plus line length 80, not applied to code blocks
   or tables.

@@ -60,15 +60,16 @@
   shell share them; Mason only installs what kickstart's `lsp.lua` lists
   (`lua_ls`, `stylua`).
 
-  | Module                            | Language server                                                                              | Formatters                                                      | Linters                                   |
-  | --------------------------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------- |
-  | `go.lua`                          | gopls                                                                                        | goimports, then gofumpt                                         | golangci-lint                             |
-  | `typescript.lua`                  | vtsls; ESLint in projects with an ESLint config                                              | Prettier (a project's own, if installed)                        | ESLint (through its language server)      |
-  | `python.lua`                      | basedpyright (type checking `standard`); Ruff                                                | Ruff: organize imports, then format                             | Ruff (through its language server)        |
-  | `shell.lua` (sh, bash; not zsh)   | bash-language-server                                                                         | shfmt, 2-space indent unless the project has an `.editorconfig` | shellcheck (through bash-language-server) |
-  | `latex.lua`                       | texlab: build with latexmk (`:LspTexlabBuild`), forward search to Skim (`:LspTexlabForward`) | tex-fmt                                                         | chktex on save (through texlab)           |
-  | `java.lua`                        | jdtls (type checking needs a project root: `.git`, `pom.xml`, `build.gradle`, …)             | google-java-format                                              | jdtls                                     |
-  | `web.lua` (HTML, CSS, SCSS, Less) | html, cssls (vscode-langservers-extracted)                                                   | Prettier                                                        | cssls (CSS validation)                    |
+  | Module                               | Language server                                                                              | Formatters                                                      | Linters                                   |
+  | ------------------------------------ | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------- |
+  | `go.lua`                             | gopls                                                                                        | goimports, then gofumpt                                         | golangci-lint                             |
+  | `typescript.lua`                     | vtsls; ESLint in projects with an ESLint config                                              | Prettier (a project's own, if installed)                        | ESLint (through its language server)      |
+  | `python.lua`                         | basedpyright (type checking `standard`); Ruff                                                | Ruff: organize imports, then format                             | Ruff (through its language server)        |
+  | `shell.lua` (sh, bash; not zsh)      | bash-language-server                                                                         | shfmt, 2-space indent unless the project has an `.editorconfig` | shellcheck (through bash-language-server) |
+  | `latex.lua`                          | texlab: build with latexmk (`:LspTexlabBuild`), forward search to Skim (`:LspTexlabForward`) | tex-fmt                                                         | chktex on save (through texlab)           |
+  | `java.lua`                           | jdtls (type checking needs a project root: `.git`, `pom.xml`, `build.gradle`, …)             | google-java-format                                              | jdtls                                     |
+  | `web.lua` (HTML, CSS, SCSS, Less)    | html, cssls (vscode-langservers-extracted)                                                   | Prettier                                                        | cssls (CSS validation)                    |
+  | `data.lua` (JSON, JSONC, YAML, TOML) | jsonls, yamlls (schemas from SchemaStore.nvim), taplo                                        | Prettier (JSON, YAML); taplo (TOML)                             | the language servers (schema validation)  |
 
 - Nerd Font icons are on (`vim.g.have_nerd_font = true` in
   `lua/custom/config/options.lua`): kickstart then loads mini.icons (also
