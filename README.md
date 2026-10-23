@@ -39,124 +39,14 @@ when it has to differ between machines; a work profile would sit next to
 `personal/` the same way. Small per-machine tweaks that don't justify a profile
 stay out of the repo (e.g. Neovim's `lua/custom/local.lua`).
 
-| Tool     | In repo                                                  | Linked to                             | Restore on a new machine                                                                                  |
-| -------- | -------------------------------------------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Zed      | `profiles/common/zed/` (`settings.json`, `themes/`)      | `~/.config/zed` (whole directory)     | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/zed ~/.config/zed`                              |
-| Ghostty  | `profiles/common/ghostty/` (`config.ghostty`, `themes/`) | `~/.config/ghostty` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/ghostty ~/.config/ghostty`                      |
-| Starship | `profiles/common/starship/starship.toml`                 | `~/.config/starship.toml`             | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/starship/starship.toml ~/.config/starship.toml` |
-| Neovim   | `profiles/common/nvim/` (kickstart.nvim copy)            | `~/.config/nvim` (whole directory)    | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/nvim ~/.config/nvim`                            |
+Each tool's folder has a README with the notes for that tool.
 
-The whole Zed folder is linked (not just `settings.json`) so Zed's own saves,
-which write a temp file and rename it, stay inside the repo instead of replacing
-a file-level link. Zed's prompt-library database and `*.bak-*` backups live
-there too but are git-ignored.
-
-Zed settings include per-language column rulers (`wrap_guides`) set to each
-language's community line length (PEP 8, Prettier, RuboCop, swift-format,
-clang-format, …); see the comments in `settings.json`.
-
-Ghostty:
-
-- It also reads
-  `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty` after the
-  linked file, so keep that one absent or it overrides the repo.
-- The window is translucent (`background-opacity`, the one value to change).
-  `background-opacity-cells` applies the same opacity to highlighted lines, diff
-  colors and the Starship prompt segments. Text selection is the exception:
-  Ghostty always draws it solid, so it uses a muted mustard.
-- It stays transparent in fullscreen only in its own (non-native) mode: enter
-  fullscreen with `cmd-enter`. The green button and `cmd-ctrl-F` use macOS
-  native fullscreen, where Ghostty turns transparency off.
-- The themes are tuned copies of Ghostty's Atom One in `themes/`, for
-  readability over the translucent background: `Atom One Dark Bright` (brighter
-  text) and `Atom One Light Deep` (darker green/red/yellow), both with the
-  mustard selection. Ghostty finds them through the linked folder.
-- The font is CommitMono Nerd Font **Mono**, which fits every icon into one cell
-  so icons stay centered (the non-Mono variant draws some, like the Apple logo,
-  wider and off-center).
-
-Starship:
-
-- Needs `eval "$(starship init zsh)"` in `~/.zshrc`. Segment colors are listed
-  at the top of `starship.toml`.
-- Segments are flat blocks rather than powerline arrows: terminal glyphs are
-  always opaque, so arrow shapes can't match translucent segment bodies.
-- Git status uses Nerd Font icons; the comments above `[git_status]` say which
-  icon replaced which symbol.
-- Paths show up to 5 folders, counted from the repo root inside a repo, with the
-  repo name in bold.
-
-Neovim:
-
-- Started as a one-time copy of
-  [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) (without its
-  `.git` and `.github/`). Needs Neovim 0.12+; plugins install through `vim.pack`
-  on first start.
-- `nvim-pack-lock.json` is tracked so every machine gets the same plugin
-  revisions. After `git pull` here, sync installed plugins to it with
-  `:lua vim.pack.update(nil, { target = 'lockfile' })`. To update plugins, run
-  `:lua vim.pack.update()` and commit the lockfile.
-- Upstream keeps everything in one `init.lua`; here each of its sections is its
-  own module under `lua/custom/` (the folder upstream promises never to touch),
-  and `init.lua` requires them in a fixed order:
-
-  | Upstream `init.lua` section                     | File here                                                         |
-  | ----------------------------------------------- | ----------------------------------------------------------------- |
-  | Header comment, 10: Optional examples           | `init.lua`                                                        |
-  | 1: Options                                      | `lua/custom/config/options.lua`                                   |
-  | 2: Keymaps & autocmds                           | `lua/custom/config/keymaps.lua`, `lua/custom/config/autocmds.lua` |
-  | 3: Plugin manager intro (and the `gh()` helper) | `lua/custom/config/pack.lua`                                      |
-  | 4: UI / core UX plugins                         | `lua/custom/plugins/ui.lua`                                       |
-  | 5: Search & navigation                          | `lua/custom/plugins/telescope.lua`                                |
-  | 6: LSP                                          | `lua/custom/plugins/lsp.lua`                                      |
-  | 7: Formatting                                   | `lua/custom/plugins/formatting.lua`                               |
-  | 8: Autocomplete & snippets                      | `lua/custom/plugins/completion.lua`                               |
-  | 9: Treesitter                                   | `lua/custom/plugins/treesitter.lua`                               |
-
-  `lua/kickstart/` (upstream's optional plugins) is kept identical to upstream.
-  Upstream's `lua/custom/plugins/init.lua` auto-loader was removed: it loads
-  files in no fixed order and would load these modules a second time.
-
-- Plugins added here (not from upstream) get their own module, required after
-  the section modules in `init.lua`, so the section files stay easy to compare
-  with upstream:
-
-  | Module                            | Plugin                                                                                                               |
-  | --------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-  | `lua/custom/plugins/markdown.lua` | [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim): renders Markdown in the buffer |
-  | `lua/custom/plugins/lint.lua`     | [nvim-lint](https://github.com/mfussenegger/nvim-lint): runs markdownlint-cli2 on Markdown buffers                   |
-
-  Markdown is also formatted with Prettier on save and with `<leader>f`
-  (`formatters_by_ft` and `format_on_save` in
-  `lua/custom/plugins/formatting.lua`).
-
-- `.luarc.json` points lua-language-server at the Neovim runtime and the
-  installed plugins, so editors other than Neovim (e.g. Zed) know about the
-  `vim` global and plugin types. lua-language-server reads it only from the
-  workspace root, so there are copies in two places, kept identical:
-  `profiles/common/nvim/.luarc.json` (Neovim's own `lua_ls`, or that folder
-  opened alone) and the repo root (the whole repo opened, as in Zed). Zed also
-  gets the same settings from the repo's `.zed/settings.json`. The runtime path,
-  `/opt/homebrew/share/nvim/runtime`, assumes Homebrew on Apple Silicon; change
-  it in all three on a machine where `:echo $VIMRUNTIME` is elsewhere.
-- Machine-specific settings (work hostnames, paths, anything not for a public
-  repo) go in `lua/custom/local.lua`. It's git-ignored, and `init.lua` loads it
-  only if it exists.
-- Upstream changes are reviewed in a read-only clone and ported by hand.
-  `.kickstart-synced` holds the last upstream commit ported. In the clone:
-
-  ```sh
-  cd ~/git/github/rscottlundgren/_third-party/nvim-lua/kickstart.nvim
-  git pull --ff-only
-  git log  $(cat ~/git/github/rscottlundgren/fidgot/profiles/common/nvim/.kickstart-synced)..HEAD
-  git diff $(cat ~/git/github/rscottlundgren/fidgot/profiles/common/nvim/.kickstart-synced)..HEAD
-  ```
-
-  Each hunk in `init.lua` falls under a `SECTION N` banner; port it into the
-  file for that section (table above). Changes under `lua/kickstart/` copy over
-  as-is. `README.md` and `LICENSE.md` here are formatted with Prettier, so port
-  their changes by hand and run `prettier --write` on them. Then write the
-  clone's `git rev-parse HEAD` into `.kickstart-synced`.
+| Tool                                           | In repo                                                  | Linked to                             | Restore on a new machine                                                                                  |
+| ---------------------------------------------- | -------------------------------------------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| [Zed](profiles/common/zed/README.md)           | `profiles/common/zed/` (`settings.json`, `themes/`)      | `~/.config/zed` (whole directory)     | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/zed ~/.config/zed`                              |
+| [Ghostty](profiles/common/ghostty/README.md)   | `profiles/common/ghostty/` (`config.ghostty`, `themes/`) | `~/.config/ghostty` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/ghostty ~/.config/ghostty`                      |
+| [Starship](profiles/common/starship/README.md) | `profiles/common/starship/starship.toml`                 | `~/.config/starship.toml`             | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/starship/starship.toml ~/.config/starship.toml` |
+| [Neovim](profiles/common/nvim/README.md)       | `profiles/common/nvim/` (kickstart.nvim copy)            | `~/.config/nvim` (whole directory)    | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/nvim ~/.config/nvim`                            |
 
 ## Third-party clones
 
