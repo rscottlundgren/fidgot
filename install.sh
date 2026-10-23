@@ -113,6 +113,9 @@ profiles/common/nvim                    $HOME/.config/nvim
 profiles/common/git/gitconfig           $HOME/.gitconfig
 profiles/common/git/ignore              $HOME/.config/git/ignore
 profiles/common/gh/config.yml           $HOME/.config/gh/config.yml
+profiles/common/ssh/config              $HOME/.ssh/config
+profiles/common/ssh/github_rscottlundgren_auth_id_ed25519.pub $HOME/.ssh/github_rscottlundgren_auth_id_ed25519.pub
+profiles/common/ssh/github_studioelif_auth_id_ed25519.pub     $HOME/.ssh/github_studioelif_auth_id_ed25519.pub
 "
 
 link() {
@@ -135,6 +138,11 @@ if ! skipped links; then
   while read -r src dest; do
     [ -n "$src" ] && link "$src" "$dest"
   done <<<"$links"
+  # ~/.ssh holds private keys: only its owner should be able to read it
+  if [ -d "$HOME/.ssh" ] && [ "$(stat -f %Lp "$HOME/.ssh")" != 700 ]; then
+    note "chmod   ~/.ssh 700"
+    run chmod 700 "$HOME/.ssh"
+  fi
 fi
 
 # --- Toolchains outside the Brewfile ------------------------------------------------
@@ -205,7 +213,7 @@ fi
 # --- Things that need a person -------------------------------------------------------------
 manual+=(
   "Open OrbStack once to finish its setup; for Kubernetes: orb start k8s"
-  "Sign in to 1Password and turn on its SSH agent (commit signing uses it)"
+  "Sign in to 1Password and turn on its SSH agent (GitHub over SSH and commit signing use it)"
   "GitHub CLI: gh auth login (once per account)"
   "Git identities: create ~/.config/git/<identity>.gitconfig and allowed_signers (see profiles/common/git/README.md)"
   "Machine-specific settings: ~/.zshrc.local, ~/.config/git/local.gitconfig, Neovim's lua/custom/local.lua"
