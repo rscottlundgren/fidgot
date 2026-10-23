@@ -67,6 +67,8 @@
 | `typescript.lua` | vtsls; ESLint in projects with an ESLint config | Prettier
 | `python.lua` | basedpyright (type checking `standard`); Ruff | Ruff: organize
 | `shell.lua` (sh, bash; not zsh) | bash-language-server | shfmt, 2-space indent
+| `latex.lua` | texlab: build with latexmk (`:LspTexlabBuild`), forward search
+to Skim (`:LspTexlabForward`) | tex-fmt | chktex on save (through texlab) |
 unless the project has an `.editorconfig` | shellcheck (through
 bash-language-server) | imports, then format | Ruff (through its language
 server) | (a project's own, if installed) | ESLint (through its language server)

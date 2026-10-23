@@ -48,6 +48,8 @@ brew "poppler" # PDF command-line tools (pdftotext, pdfinfo, ...)
 # LaTeX
 cask "mactex"
 cask "skim"
+brew "texlab" # LaTeX language server
+brew "tex-fmt" # LaTeX formatter (MacTeX's latexindent needs Perl modules macOS lacks)
 
 # Containers and Kubernetes
 # OrbStack includes the Docker CLI, docker compose and buildx, and a local

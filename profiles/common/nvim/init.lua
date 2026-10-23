@@ -107,6 +107,7 @@ require 'custom.languages.go'
 require 'custom.languages.typescript'
 require 'custom.languages.python'
 require 'custom.languages.shell'
+require 'custom.languages.latex'
 
 -- ============================================================
 -- SECTION 10: OPTIONAL EXAMPLES / NEXT STEPS
