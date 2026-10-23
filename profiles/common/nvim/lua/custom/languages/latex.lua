@@ -9,6 +9,10 @@
 -- MacTeX's latexindent isn't used: it needs Perl modules macOS's system Perl
 -- doesn't have.
 
+-- A .tex file is LaTeX (filetype tex), even before it has anything in it that
+-- says so; otherwise new files get plaintex and miss spell checking and tex-fmt
+vim.g.tex_flavor = 'latex'
+
 vim.lsp.config('texlab', {
   settings = {
     texlab = {
