@@ -65,7 +65,9 @@
   | `go.lua` | gopls           | goimports, then gofumpt | golangci-lint |
 
 | `typescript.lua` | vtsls; ESLint in projects with an ESLint config | Prettier
-(a project's own, if installed) | ESLint (through its language server) |
+| `python.lua` | basedpyright (type checking `standard`); Ruff | Ruff: organize
+imports, then format | Ruff (through its language server) | (a project's own, if
+installed) | ESLint (through its language server) |
 
 - Nerd Font icons are on (`vim.g.have_nerd_font = true` in
   `lua/custom/config/options.lua`): kickstart then loads mini.icons (also
