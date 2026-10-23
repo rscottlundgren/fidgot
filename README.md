@@ -22,15 +22,24 @@
 
 # Config
 
-App configuration that lives in this repo and is linked into place.
-`profiles/common/` holds config shared by every machine; `profiles/personal/`
-holds config for the personal machine only.
+App configuration that lives in this repo and is linked into place. It's
+grouped into profiles by which machines use it:
+
+| Profile | For | Contains |
+| --- | --- | --- |
+| `profiles/common/` | Every machine (personal and work) | Neovim, Ghostty, Starship, Zed |
+| `profiles/personal/` | The personal machine only | `life-ops` scripts |
+
+Config starts in `common/`. Something moves to a machine-specific profile only
+when it has to differ between machines; a work profile would sit next to
+`personal/` the same way. Small per-machine tweaks that don't justify a
+profile stay out of the repo (e.g. Neovim's `lua/custom/local.lua`).
 
 | Tool | In repo | Linked to | Restore on a new machine |
 | --- | --- | --- | --- |
-| Zed | `profiles/personal/zed/` (`settings.json`, `themes/`) | `~/.config/zed` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/zed ~/.config/zed` |
-| Ghostty | `profiles/personal/ghostty/` (`config.ghostty`, `themes/`) | `~/.config/ghostty` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/ghostty ~/.config/ghostty` |
-| Starship | `profiles/personal/starship/starship.toml` | `~/.config/starship.toml` | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/starship/starship.toml ~/.config/starship.toml` |
+| Zed | `profiles/common/zed/` (`settings.json`, `themes/`) | `~/.config/zed` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/zed ~/.config/zed` |
+| Ghostty | `profiles/common/ghostty/` (`config.ghostty`, `themes/`) | `~/.config/ghostty` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/ghostty ~/.config/ghostty` |
+| Starship | `profiles/common/starship/starship.toml` | `~/.config/starship.toml` | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/starship/starship.toml ~/.config/starship.toml` |
 | Neovim | `profiles/common/nvim/` (kickstart.nvim copy) | `~/.config/nvim` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/nvim ~/.config/nvim` |
 
 The whole Zed folder is linked (not just `settings.json`) so Zed's own saves,
