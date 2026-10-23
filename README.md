@@ -19,6 +19,8 @@
 | --- | --- | --- | --- | --- | --- |
 | ?? | [Starship](https://starship.rs/) | Homebrew | Homebrew | `brew install starship` | N / A |
 | ?? | [gh]() | Homebrew | Homebrew | `brew install gh` | N / A |
+| ?? | [Prettier](https://prettier.io/) | Homebrew | Homebrew | `brew install prettier` | Formats Markdown; see Markdown below |
+| ?? | [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2) | Homebrew | Homebrew | `brew install markdownlint-cli2` | Lints Markdown; see Markdown below |
 
 # Config
 
@@ -118,6 +120,10 @@ Neovim:
   | Module | Plugin |
   | --- | --- |
   | `lua/custom/plugins/markdown.lua` | [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim): renders Markdown in the buffer |
+  | `lua/custom/plugins/lint.lua` | [nvim-lint](https://github.com/mfussenegger/nvim-lint): runs markdownlint-cli2 on Markdown buffers |
+
+  Markdown is also formatted with Prettier on save and with `<leader>f`
+  (`formatters_by_ft` and `format_on_save` in `lua/custom/plugins/formatting.lua`).
 - `.luarc.json` points lua-language-server at the Neovim runtime and the
   installed plugins, so editors other than Neovim (e.g. Zed) know about the
   `vim` global and plugin types. lua-language-server reads it only from the
@@ -152,3 +158,22 @@ Clones of other people's repos live at
 `rscottlundgren/_third-party/nvim-lua/kickstart.nvim`), apart from my own
 projects. Keeping them under the account folder means that account's git
 identity still applies. The leading `_` sorts the folder first.
+
+# Markdown
+
+Markdown is formatted with Prettier and linted with markdownlint-cli2, using
+config at the repo root, so Neovim, Zed and the command line agree:
+
+- `.prettierrc`: wrap prose at 80 columns (`proseWrap: "always"`). Zed's
+  built-in Prettier reads it.
+- `.markdownlint-cli2.jsonc`: markdownlint's Prettier style (turns off rules
+  that conflict with Prettier) plus line length 80, not applied to code blocks
+  or tables.
+- `.prettierignore`: skips Neovim's help files and the local `.context/` notes.
+
+From the repo root:
+
+```sh
+prettier --check '**/*.md'      # or --write to format
+markdownlint-cli2 '**/*.md'     # or --fix for what it can fix itself
+```

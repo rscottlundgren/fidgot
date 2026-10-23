@@ -1,0 +1,5 @@
+# Neovim help files (Vim help format, not Markdown)
+profiles/common/nvim/doc/
+
+# Local session notes (git-excluded via .git/info/exclude, not .gitignore)
+.context/

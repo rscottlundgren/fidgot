@@ -14,6 +14,7 @@ require('conform').setup {
     local enabled_filetypes = {
       -- lua = true,
       -- python = true,
+      markdown = true,
     }
     if enabled_filetypes[vim.bo[bufnr].filetype] then
       return { timeout_ms = 500 }
@@ -26,6 +27,7 @@ require('conform').setup {
   },
   -- You can also specify external formatters in here.
   formatters_by_ft = {
+    markdown = { 'prettier' }, -- Prettier from Homebrew; reads the repo's .prettierrc
     -- rust = { 'rustfmt' },
     -- Conform can also run multiple formatters sequentially
     -- python = { "isort", "black" },
