@@ -54,8 +54,9 @@
   it in all three on a machine where `:echo $VIMRUNTIME` is elsewhere.
 - Kickstart's optional modules in `lua/kickstart/plugins/` are turned on by
   uncommenting their `require` in `init.lua` (section 10), and stay identical to
-  upstream. Enabled: `autopairs` (closing brackets and quotes as you type).
-  `lint` stays off: `lua/custom/plugins/lint.lua` replaces it.
+  upstream. Enabled: `autopairs` (closing brackets and quotes as you type) and
+  `indent_line` (indentation guides, including on blank lines). `lint` stays
+  off: `lua/custom/plugins/lint.lua` replaces it.
 - Languages each have a module in `lua/custom/languages/`, required from
   `init.lua` after the formatting and lint modules. A module enables the
   language server (nvim-lspconfig's default config) and adds the language's
