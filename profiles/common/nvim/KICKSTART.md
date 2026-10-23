@@ -1,5 +1,12 @@
 # kickstart.nvim
 
+> [!NOTE]
+>
+> This is kickstart.nvim's own README, kept for reference (its FAQ and
+> background). In fidgot, Neovim isn't installed the way it describes (forking
+> and cloning into `~/.config/nvim`): see [`README.md`](README.md) for how this
+> config is set up and kept in sync with upstream.
+
 ## Introduction
 
 A starting point for Neovim that is:
