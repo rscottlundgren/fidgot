@@ -56,6 +56,9 @@ Installed outside Homebrew:
 - pnpm and yarn, through Node's corepack: `corepack enable pnpm`. Each project
   pins its version with `packageManager` in `package.json`.
 
+Coding-agent setup (Claude Code config from the private agent-config repo):
+[`profiles/common/agents/`](profiles/common/agents/README.md).
+
 ## Config
 
 App configuration that lives in this repo and is linked into place. It's grouped
