@@ -34,10 +34,11 @@
   the section modules in `init.lua`, so the section files stay easy to compare
   with upstream:
 
-  | Module                            | Plugin                                                                                                               |
-  | --------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-  | `lua/custom/plugins/markdown.lua` | [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim): renders Markdown in the buffer |
-  | `lua/custom/plugins/lint.lua`     | [nvim-lint](https://github.com/mfussenegger/nvim-lint): runs markdownlint-cli2 on Markdown buffers                   |
+  | Module                            | Plugin                                                                                                                                                                                                                                           |
+  | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  | `lua/custom/plugins/markdown.lua` | [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim): renders Markdown in the buffer                                                                                                                             |
+  | `lua/custom/plugins/lint.lua`     | [nvim-lint](https://github.com/mfussenegger/nvim-lint): runs markdownlint-cli2 on Markdown buffers                                                                                                                                               |
+  | `lua/custom/plugins/debug.lua`    | kickstart's debug module without Mason: [nvim-dap](https://github.com/mfussenegger/nvim-dap), nvim-dap-ui, nvim-dap-go; delve from Homebrew. F5 start/continue, F1/F2/F3 step into/over/out, F7 toggle UI, `<leader>b` / `<leader>B` breakpoints |
 
   Markdown is also formatted with Prettier on save and with `<leader>f`
   (`formatters_by_ft` and `format_on_save` in
@@ -57,7 +58,8 @@
   upstream. Enabled: `autopairs` (closing brackets and quotes as you type),
   `indent_line` (indentation guides, including on blank lines) and `neo-tree`
   (file tree; `\` reveals the current file, `\` in the tree closes it). `lint`
-  stays off: `lua/custom/plugins/lint.lua` replaces it.
+  and `debug` stay off: `lua/custom/plugins/lint.lua` and
+  `lua/custom/plugins/debug.lua` replace them.
 - Languages each have a module in `lua/custom/languages/`, required from
   `init.lua` after the formatting and lint modules. A module enables the
   language server (nvim-lspconfig's default config) and adds the language's
