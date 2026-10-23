@@ -109,13 +109,13 @@ git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HO
 
 If you're using `cmd.exe`:
 
-```
+```bat
 git clone https://github.com/nvim-lua/kickstart.nvim.git "%localappdata%\nvim"
 ```
 
 If you're using `powershell.exe`
 
-```
+```powershell
 git clone https://github.com/nvim-lua/kickstart.nvim.git "${env:LOCALAPPDATA}\nvim"
 ```
 
@@ -160,7 +160,7 @@ adding popularly requested plugins.
     [NVIM_APPNAME](https://neovim.io/doc/user/starting.html#%24NVIM_APPNAME)`=nvim-NAME`
     to maintain multiple configurations. For example, you can install the
     kickstart configuration in `~/.config/nvim-kickstart` and create an alias:
-    ```
+    ```sh
     alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
     ```
     When you run Neovim using `nvim-kickstart` alias it will use the alternative
@@ -231,21 +231,21 @@ the easiest way is to use choco:
 1. install [chocolatey](https://chocolatey.org/install) either follow the
    instructions on the page or use winget, run in cmd as **admin**:
 
-```
+```bat
 winget install --accept-source-agreements chocolatey.chocolatey
 ```
 
 2. install all requirements using choco, exit the previous cmd and open a new
    one so that choco path is set, and run in cmd as **admin**:
 
-```
+```bat
 choco install -y neovim git ripgrep wget fd unzip gzip mingw make tree-sitter
 ```
 
 </details>
 <details><summary>WSL (Windows Subsystem for Linux)</summary>
 
-```
+```sh
 wsl --install
 wsl
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
@@ -259,7 +259,7 @@ sudo apt install make gcc ripgrep fd-find tree-sitter-cli unzip git xclip neovim
 
 <details><summary>Ubuntu Install Steps</summary>
 
-```
+```sh
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update
 sudo apt install make gcc ripgrep fd-find tree-sitter-cli unzip git xclip neovim
@@ -268,7 +268,7 @@ sudo apt install make gcc ripgrep fd-find tree-sitter-cli unzip git xclip neovim
 </details>
 <details><summary>Debian Install Steps</summary>
 
-```
+```sh
 sudo apt update
 sudo apt install make gcc ripgrep fd-find tree-sitter-cli unzip git xclip curl
 
@@ -286,7 +286,7 @@ sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/
 </details>
 <details><summary>Fedora Install Steps</summary>
 
-```
+```sh
 sudo dnf install -y gcc make git ripgrep fd-find tree-sitter-cli unzip neovim
 ```
 
@@ -294,7 +294,7 @@ sudo dnf install -y gcc make git ripgrep fd-find tree-sitter-cli unzip neovim
 
 <details><summary>Arch Install Steps</summary>
 
-```
+```sh
 sudo pacman -S --noconfirm --needed gcc make git ripgrep fd tree-sitter-cli unzip neovim
 ```
 
@@ -322,8 +322,8 @@ recommended by neovim is significantly behind. If that is the case for you, pick
 one of the following methods that are known to deliver fresh neovim versions
 very quickly. They have been picked for their popularity and because they make
 installing and updating neovim to the latest versions easy. You can also find
-more detail about the available methods being discussed
-[here](https://github.com/nvim-lua/kickstart.nvim/issues/1583).
+more detail about the available methods being discussed in
+[kickstart.nvim issue #1583](https://github.com/nvim-lua/kickstart.nvim/issues/1583).
 
 <details><summary>Bob</summary>
 
