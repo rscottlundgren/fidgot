@@ -3,3 +3,6 @@ profiles/common/nvim/doc/
 
 # Local session notes (git-excluded via .git/info/exclude, not .gitignore)
 .context/
+
+# Language fixtures for the tests: unformatted on purpose
+tests/testdata/
