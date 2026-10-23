@@ -102,6 +102,11 @@ Neovim:
   `lua/kickstart/` (upstream's optional plugins) is kept identical to upstream.
   Upstream's `lua/custom/plugins/init.lua` auto-loader was removed: it loads
   files in no fixed order and would load these modules a second time.
+- `.luarc.json` points lua-language-server at the Neovim runtime and the
+  installed plugins, so editors other than Neovim (e.g. Zed) know about the
+  `vim` global and plugin types. Neovim's own `lua_ls` reads it too. The
+  runtime path, `/opt/homebrew/share/nvim/runtime`, assumes Homebrew on Apple
+  Silicon; change it on a machine where `:echo $VIMRUNTIME` is elsewhere.
 - Machine-specific settings (work hostnames, paths, anything not for a public
   repo) go in `lua/custom/local.lua`. It's git-ignored, and `init.lua` loads it
   only if it exists.
