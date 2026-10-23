@@ -111,6 +111,13 @@ Neovim:
   `lua/kickstart/` (upstream's optional plugins) is kept identical to upstream.
   Upstream's `lua/custom/plugins/init.lua` auto-loader was removed: it loads
   files in no fixed order and would load these modules a second time.
+- Plugins added here (not from upstream) get their own module, required after
+  the section modules in `init.lua`, so the section files stay easy to compare
+  with upstream:
+
+  | Module | Plugin |
+  | --- | --- |
+  | `lua/custom/plugins/markdown.lua` | [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim): renders Markdown in the buffer |
 - `.luarc.json` points lua-language-server at the Neovim runtime and the
   installed plugins, so editors other than Neovim (e.g. Zed) know about the
   `vim` global and plugin types. lua-language-server reads it only from the
