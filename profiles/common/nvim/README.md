@@ -52,6 +52,18 @@
   gets the same settings from the repo's `.zed/settings.json`. The runtime path,
   `/opt/homebrew/share/nvim/runtime`, assumes Homebrew on Apple Silicon; change
   it in all three on a machine where `:echo $VIMRUNTIME` is elsewhere.
+- Languages each have a module in `lua/custom/languages/`, required from
+  `init.lua` after the formatting and lint modules. A module enables the
+  language server (nvim-lspconfig's default config) and adds the language's
+  formatters to conform (`<leader>f`) and linters to nvim-lint. Their tools come
+  from Homebrew (`profiles/common/Brewfile`), not Mason, so Neovim, Zed and the
+  shell share them; Mason only installs what kickstart's `lsp.lua` lists
+  (`lua_ls`, `stylua`).
+
+  | Module   | Language server | Formatters              | Linters       |
+  | -------- | --------------- | ----------------------- | ------------- |
+  | `go.lua` | gopls           | goimports, then gofumpt | golangci-lint |
+
 - Nerd Font icons are on (`vim.g.have_nerd_font = true` in
   `lua/custom/config/options.lua`): kickstart then loads mini.icons (also
   standing in for nvim-web-devicons, which Telescope uses) and shows icons in
