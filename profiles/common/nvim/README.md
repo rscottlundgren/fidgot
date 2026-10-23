@@ -66,8 +66,11 @@
 
 | `typescript.lua` | vtsls; ESLint in projects with an ESLint config | Prettier
 | `python.lua` | basedpyright (type checking `standard`); Ruff | Ruff: organize
-imports, then format | Ruff (through its language server) | (a project's own, if
-installed) | ESLint (through its language server) |
+| `shell.lua` (sh, bash; not zsh) | bash-language-server | shfmt, 2-space indent
+unless the project has an `.editorconfig` | shellcheck (through
+bash-language-server) | imports, then format | Ruff (through its language
+server) | (a project's own, if installed) | ESLint (through its language server)
+|
 
 - Nerd Font icons are on (`vim.g.have_nerd_font = true` in
   `lua/custom/config/options.lua`): kickstart then loads mini.icons (also
