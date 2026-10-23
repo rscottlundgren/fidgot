@@ -52,6 +52,12 @@
   gets the same settings from the repo's `.zed/settings.json`. The runtime path,
   `/opt/homebrew/share/nvim/runtime`, assumes Homebrew on Apple Silicon; change
   it in all three on a machine where `:echo $VIMRUNTIME` is elsewhere.
+- Nerd Font icons are on (`vim.g.have_nerd_font = true` in
+  `lua/custom/config/options.lua`): kickstart then loads mini.icons (also
+  standing in for nvim-web-devicons, which Telescope uses) and shows icons in
+  which-key and the statusline, and render-markdown uses mini.icons for code
+  block icons. The terminal must use a Nerd Font; Ghostty's is CommitMono Nerd
+  Font Mono (see [Ghostty](../ghostty/README.md)).
 - Machine-specific settings (work hostnames, paths, anything not for a public
   repo) go in `lua/custom/local.lua`. It's git-ignored, and `init.lua` loads it
   only if it exists.
