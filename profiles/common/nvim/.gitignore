@@ -1,0 +1,14 @@
+tags
+test.sh
+.luarc.json
+nvim
+
+spell/
+
+# nvim-pack-lock.json is tracked so every machine installs the same plugin revisions
+# - see :help vim.pack-lockfile
+
+# Machine-specific settings (loaded by init.lua if present); never committed
+lua/custom/local.lua
+
+.DS_Store

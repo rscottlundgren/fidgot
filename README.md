@@ -23,12 +23,15 @@
 # Config
 
 App configuration that lives in this repo and is linked into place.
+`profiles/common/` holds config shared by every machine; `profiles/personal/`
+holds config for the personal machine only.
 
 | Tool | In repo | Linked to | Restore on a new machine |
 | --- | --- | --- | --- |
 | Zed | `profiles/personal/zed/` (`settings.json`, `themes/`) | `~/.config/zed` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/zed ~/.config/zed` |
 | Ghostty | `profiles/personal/ghostty/` (`config.ghostty`, `themes/`) | `~/.config/ghostty` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/ghostty ~/.config/ghostty` |
 | Starship | `profiles/personal/starship/starship.toml` | `~/.config/starship.toml` | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/personal/starship/starship.toml ~/.config/starship.toml` |
+| Neovim | `profiles/common/nvim/` (kickstart.nvim copy) | `~/.config/nvim` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/nvim ~/.config/nvim` |
 
 The whole Zed folder is linked (not just `settings.json`) so Zed's own saves,
 which write a temp file and rename it, stay inside the repo instead of
@@ -68,3 +71,37 @@ Starship:
   icon replaced which symbol.
 - Paths show up to 5 folders, counted from the repo root inside a repo, with
   the repo name in bold.
+
+Neovim:
+
+- Started as a one-time copy of
+  [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) (without its
+  `.git` and `.github/`). Needs Neovim 0.12+; plugins install through
+  `vim.pack` on first start.
+- `nvim-pack-lock.json` is tracked so every machine gets the same plugin
+  revisions. After `git pull` here, sync installed plugins to it with
+  `:lua vim.pack.update(nil, { target = 'lockfile' })`. To update plugins, run
+  `:lua vim.pack.update()` and commit the lockfile.
+- Machine-specific settings (work hostnames, paths, anything not for a public
+  repo) go in `lua/custom/local.lua`. It's git-ignored, and `init.lua` loads it
+  only if it exists.
+- Upstream changes are reviewed in a read-only clone and ported by hand.
+  `.kickstart-synced` holds the last upstream commit ported. In the clone:
+
+  ```sh
+  cd ~/git/github/rscottlundgren/_third-party/nvim-lua/kickstart.nvim
+  git pull --ff-only
+  git log  $(cat ~/git/github/rscottlundgren/fidgot/profiles/common/nvim/.kickstart-synced)..HEAD
+  git diff $(cat ~/git/github/rscottlundgren/fidgot/profiles/common/nvim/.kickstart-synced)..HEAD
+  ```
+
+  Port what's wanted, then write the clone's `git rev-parse HEAD` into
+  `.kickstart-synced`.
+
+# Third-party clones
+
+Clones of other people's repos live at
+`~/git/github/<account>/_third-party/<owner>/<repo>` (for example
+`rscottlundgren/_third-party/nvim-lua/kickstart.nvim`), apart from my own
+projects. Keeping them under the account folder means that account's git
+identity still applies. The leading `_` sorts the folder first.
