@@ -61,10 +61,10 @@ Installed outside Homebrew:
 App configuration that lives in this repo and is linked into place. It's grouped
 into profiles by which machines use it:
 
-| Profile              | For                               | Contains                                      |
-| -------------------- | --------------------------------- | --------------------------------------------- |
-| `profiles/common/`   | Every machine (personal and work) | Brewfile, zsh, Neovim, Ghostty, Starship, Zed |
-| `profiles/personal/` | The personal machine only         | Brewfile, `life-ops` scripts                  |
+| Profile              | For                               | Contains                                           |
+| -------------------- | --------------------------------- | -------------------------------------------------- |
+| `profiles/common/`   | Every machine (personal and work) | Brewfile, zsh, git, Neovim, Ghostty, Starship, Zed |
+| `profiles/personal/` | The personal machine only         | Brewfile, `life-ops` scripts                       |
 
 Config starts in `common/`. Something moves to a machine-specific profile only
 when it has to differ between machines; a work profile would sit next to
@@ -73,13 +73,14 @@ stay out of the repo (e.g. Neovim's `lua/custom/local.lua`).
 
 Each tool's folder has a README with the notes for that tool.
 
-| Tool                                           | In repo                                                  | Linked to                             | Restore on a new machine                                                                                                                                           |
-| ---------------------------------------------- | -------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Zed](profiles/common/zed/README.md)           | `profiles/common/zed/` (`settings.json`, `themes/`)      | `~/.config/zed` (whole directory)     | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/zed ~/.config/zed`                                                                                       |
-| [Ghostty](profiles/common/ghostty/README.md)   | `profiles/common/ghostty/` (`config.ghostty`, `themes/`) | `~/.config/ghostty` (whole directory) | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/ghostty ~/.config/ghostty`                                                                               |
-| [Starship](profiles/common/starship/README.md) | `profiles/common/starship/starship.toml`                 | `~/.config/starship.toml`             | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/starship/starship.toml ~/.config/starship.toml`                                                          |
-| [Neovim](profiles/common/nvim/README.md)       | `profiles/common/nvim/` (kickstart.nvim copy)            | `~/.config/nvim` (whole directory)    | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/nvim ~/.config/nvim`                                                                                     |
-| [zsh](profiles/common/zsh/README.md)           | `profiles/common/zsh/` (`zshrc`, `zprofile`)             | `~/.zshrc`, `~/.zprofile`             | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/zsh/zshrc ~/.zshrc && ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/zsh/zprofile ~/.zprofile` |
+| Tool                                           | In repo                                                  | Linked to                              | Restore on a new machine                                                                                                                                                          |
+| ---------------------------------------------- | -------------------------------------------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Zed](profiles/common/zed/README.md)           | `profiles/common/zed/` (`settings.json`, `themes/`)      | `~/.config/zed` (whole directory)      | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/zed ~/.config/zed`                                                                                                      |
+| [Ghostty](profiles/common/ghostty/README.md)   | `profiles/common/ghostty/` (`config.ghostty`, `themes/`) | `~/.config/ghostty` (whole directory)  | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/ghostty ~/.config/ghostty`                                                                                              |
+| [Starship](profiles/common/starship/README.md) | `profiles/common/starship/starship.toml`                 | `~/.config/starship.toml`              | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/starship/starship.toml ~/.config/starship.toml`                                                                         |
+| [Neovim](profiles/common/nvim/README.md)       | `profiles/common/nvim/` (kickstart.nvim copy)            | `~/.config/nvim` (whole directory)     | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/nvim ~/.config/nvim`                                                                                                    |
+| [zsh](profiles/common/zsh/README.md)           | `profiles/common/zsh/` (`zshrc`, `zprofile`)             | `~/.zshrc`, `~/.zprofile`              | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/zsh/zshrc ~/.zshrc && ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/zsh/zprofile ~/.zprofile`                |
+| [git](profiles/common/git/README.md)           | `profiles/common/git/` (`gitconfig`, `ignore`)           | `~/.gitconfig`, `~/.config/git/ignore` | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/git/gitconfig ~/.gitconfig && ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/git/ignore ~/.config/git/ignore` |
 
 ## Third-party clones
 

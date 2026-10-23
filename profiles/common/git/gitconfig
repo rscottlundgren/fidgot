@@ -1,0 +1,38 @@
+# Shared git config. Linked to ~/.gitconfig; see README.md in this folder.
+
+# Commits are signed with an SSH key held in 1Password
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+	allowedSignersFile = ~/.config/git/allowed_signers
+[commit]
+	gpgsign = true
+
+# No global [user]: the name, email and signing key come from an identity file
+# picked by folder, so a repo can't be committed to under the wrong identity.
+# The identity files aren't in this repo (they hold email addresses); git skips
+# an include whose file doesn't exist.
+[includeIf "gitdir/i:~/git/github/rscottlundgren/"]
+	path = ~/.config/git/rscottlundgren.gitconfig
+[includeIf "gitdir/i:~/git/github/studio-elif/"]
+	path = ~/.config/git/studioelif.gitconfig
+
+# GitHub over HTTPS authenticates through the gh CLI
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+# Machine-specific settings (e.g. a work identity for a work folder); not
+# tracked. Last, so it can override anything above.
+[include]
+	path = ~/.config/git/local.gitconfig
