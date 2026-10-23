@@ -109,6 +109,7 @@ require 'custom.languages.python'
 require 'custom.languages.shell'
 require 'custom.languages.latex'
 require 'custom.languages.java'
+require 'custom.languages.web'
 
 -- ============================================================
 -- SECTION 10: OPTIONAL EXAMPLES / NEXT STEPS
