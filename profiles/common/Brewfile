@@ -34,6 +34,9 @@ brew "vtsls" # TypeScript/JavaScript language server
 brew "vscode-langservers-extracted" # ESLint, HTML, CSS and JSON language servers
 brew "basedpyright" # Python language server
 brew "ruff" # Python linter and formatter
+brew "bash-language-server"
+brew "shellcheck" # shell linter (used by bash-language-server)
+brew "shfmt" # shell formatter
 brew "rustup" # toolchains: rustup default stable; rustup component add rust-analyzer
 brew "zig"
 brew "zls" # Zig language server; must match Zig's release (upgrade together)
