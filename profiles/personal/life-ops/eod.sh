@@ -1,9 +1,11 @@
 # End of day: stage ONLY log/, commit with a content-free message, sync.
 eod() {
-  local d; d="$(date +%Y-%m-%d)"
+  local d
+  d="$(date +%Y-%m-%d)"
 
   if [ -z "$(git -C "$LIFEOPS" status --porcelain -- log/)" ]; then
-    echo "lo: no log changes to commit"; return 0
+    echo "lo: no log changes to commit"
+    return 0
   fi
 
   git -C "$LIFEOPS" add -- log/ || return 1
