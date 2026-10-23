@@ -101,6 +101,7 @@ require 'custom.plugins.treesitter' -- Section 9
 require 'custom.plugins.markdown' -- not from upstream (render-markdown.nvim)
 require 'custom.plugins.lint' -- not from upstream (nvim-lint)
 require 'custom.plugins.debug' -- not from upstream (kickstart's debug module without Mason)
+require 'custom.config.spell' -- not from upstream (spell checking for prose)
 
 -- Language support (not from upstream): one module per language, each with its
 -- language server, formatters and linters. Loaded after formatting and lint.
