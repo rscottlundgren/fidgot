@@ -61,10 +61,10 @@ Installed outside Homebrew:
 App configuration that lives in this repo and is linked into place. It's grouped
 into profiles by which machines use it:
 
-| Profile              | For                               | Contains                                           |
-| -------------------- | --------------------------------- | -------------------------------------------------- |
-| `profiles/common/`   | Every machine (personal and work) | Brewfile, zsh, git, Neovim, Ghostty, Starship, Zed |
-| `profiles/personal/` | The personal machine only         | Brewfile, `life-ops` scripts                       |
+| Profile              | For                               | Contains                                               |
+| -------------------- | --------------------------------- | ------------------------------------------------------ |
+| `profiles/common/`   | Every machine (personal and work) | Brewfile, zsh, git, gh, Neovim, Ghostty, Starship, Zed |
+| `profiles/personal/` | The personal machine only         | Brewfile, `life-ops` scripts                           |
 
 Config starts in `common/`. Something moves to a machine-specific profile only
 when it has to differ between machines; a work profile would sit next to
@@ -81,6 +81,7 @@ Each tool's folder has a README with the notes for that tool.
 | [Neovim](profiles/common/nvim/README.md)       | `profiles/common/nvim/` (kickstart.nvim copy)            | `~/.config/nvim` (whole directory)     | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/nvim ~/.config/nvim`                                                                                                    |
 | [zsh](profiles/common/zsh/README.md)           | `profiles/common/zsh/` (`zshrc`, `zprofile`)             | `~/.zshrc`, `~/.zprofile`              | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/zsh/zshrc ~/.zshrc && ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/zsh/zprofile ~/.zprofile`                |
 | [git](profiles/common/git/README.md)           | `profiles/common/git/` (`gitconfig`, `ignore`)           | `~/.gitconfig`, `~/.config/git/ignore` | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/git/gitconfig ~/.gitconfig && ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/git/ignore ~/.config/git/ignore` |
+| [gh](profiles/common/gh/README.md)             | `profiles/common/gh/config.yml`                          | `~/.config/gh/config.yml`              | `ln -s ~/git/github/rscottlundgren/fidgot/profiles/common/gh/config.yml ~/.config/gh/config.yml`                                                                                  |
 
 ## Third-party clones
 
