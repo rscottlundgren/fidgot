@@ -30,6 +30,11 @@ brew-up() {
 # Go-installed tools (e.g. the handoff helper from agent-config)
 export PATH="$HOME/go/bin:$PATH"
 
+# Rust: rustup from Homebrew (its rustc, cargo, rust-analyzer, ... aren't on
+# PATH by default), and tools installed with `cargo install`
+[ -d "$HOMEBREW_PREFIX/opt/rustup/bin" ] && export PATH="$HOMEBREW_PREFIX/opt/rustup/bin:$PATH"
+[ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
+
 # Added by the Postman CLI installer
 export PATH="$HOME/.local/bin:$PATH"
 
