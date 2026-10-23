@@ -1,0 +1,85 @@
+# Homebrew installs for every machine.
+# Install: brew bundle install --file profiles/common/Brewfile
+# Check:   brew bundle check --file profiles/common/Brewfile
+
+# Shell and git
+brew "git"
+brew "git-lfs"
+brew "git-crypt"
+brew "gh"
+brew "starship"
+
+# Editors and terminal
+brew "neovim"
+cask "ghostty"
+cask "zed"
+cask "visual-studio-code"
+
+# Search, build and Neovim dependencies
+brew "ripgrep"
+brew "fd"
+brew "tree"
+brew "tree-sitter-cli"
+brew "make"
+brew "gcc"
+brew "unzip"
+
+# Languages and tooling
+brew "go"
+brew "prettier"
+brew "markdownlint-cli2"
+brew "openspec"
+brew "poppler" # PDF command-line tools (pdftotext, pdfinfo, ...)
+
+# LaTeX
+cask "mactex"
+cask "skim"
+
+# Containers and Kubernetes
+# OrbStack includes the Docker CLI, docker compose and buildx, and a local
+# Kubernetes cluster (`orb start k8s`). Its bundled kubectl lags the cluster's
+# version, so kubectl comes from Homebrew (first on PATH).
+cask "orbstack"
+brew "kubernetes-cli"
+
+# Infrastructure as code (Terraform isn't in homebrew-core; HashiCorp's tap)
+tap "hashicorp/tap"
+brew "hashicorp/tap/terraform"
+
+# Cloud and file sync
+brew "awscli"
+brew "rclone"
+
+# Fonts
+cask "font-commit-mono-nerd-font"
+cask "font-geist-mono-nerd-font"
+cask "font-zed-mono-nerd-font"
+
+# Apps
+cask "1password"
+cask "1password-cli"
+cask "claude"
+cask "claude-code"
+cask "postman"
+cask "zoom"
+cask "discord"
+cask "spotify"
+cask "brainfm"
+cask "google-chrome"
+cask "firefox@developer-edition"
+
+# ArtCraft apps (each its own cask)
+cask "artcraft" # video crafting engine
+cask "cadcraft" # CAD and drafting
+cask "deckcraft" # presentations
+cask "designcraft" # page layout and publishing
+cask "effectcraft" # motion graphics and VFX
+cask "figcraft" # interface design and prototyping
+cask "filmcraft" # video editor
+cask "gridcraft" # spreadsheets
+cask "lightcraft" # photo library and raw developer
+cask "pdfcraft" # PDF editor
+cask "photocraft" # image editor
+cask "soundcraft" # audio workstation
+cask "vectorcraft" # vector editor
+cask "wordcraft" # word processor

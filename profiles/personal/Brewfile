@@ -1,0 +1,22 @@
+# Homebrew installs for the personal machine only.
+# Install: brew bundle install --file profiles/personal/Brewfile
+# Check:   brew bundle check --file profiles/personal/Brewfile
+
+# Proton
+tap "protonpass/tap"
+brew "protonpass/tap/pass-cli"
+cask "proton-drive"
+cask "proton-mail"
+cask "proton-mail-bridge"
+cask "proton-meet"
+cask "proton-pass"
+cask "protonvpn"
+
+# Apps
+cask "whatsapp"
+cask "quicken"
+cask "microsoft-office"
+cask "standard-notes"
+cask "dropbox"
+cask "zen"
+cask "adobe-creative-cloud"
