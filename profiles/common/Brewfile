@@ -32,6 +32,8 @@ brew "gofumpt"
 brew "golangci-lint"
 brew "vtsls" # TypeScript/JavaScript language server
 brew "vscode-langservers-extracted" # ESLint, HTML, CSS and JSON language servers
+brew "basedpyright" # Python language server
+brew "ruff" # Python linter and formatter
 brew "rustup" # toolchains: rustup default stable; rustup component add rust-analyzer
 brew "zig"
 brew "zls" # Zig language server; must match Zig's release (upgrade together)

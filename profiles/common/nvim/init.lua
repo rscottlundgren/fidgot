@@ -105,6 +105,7 @@ require 'custom.plugins.lint' -- not from upstream (nvim-lint)
 -- language server, formatters and linters. Loaded after formatting and lint.
 require 'custom.languages.go'
 require 'custom.languages.typescript'
+require 'custom.languages.python'
 
 -- ============================================================
 -- SECTION 10: OPTIONAL EXAMPLES / NEXT STEPS
