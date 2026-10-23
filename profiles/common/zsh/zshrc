@@ -35,6 +35,13 @@ export PATH="$HOME/go/bin:$PATH"
 [ -d "$HOMEBREW_PREFIX/opt/rustup/bin" ] && export PATH="$HOMEBREW_PREFIX/opt/rustup/bin:$PATH"
 [ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
 
+# Java: Homebrew's openjdk is keg-only (not linked), so put it on PATH and set
+# JAVA_HOME; macOS's /usr/bin/java stub only finds JDKs in /Library/Java
+if [ -d "$HOMEBREW_PREFIX/opt/openjdk/libexec/openjdk.jdk" ]; then
+  export JAVA_HOME="$HOMEBREW_PREFIX/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+  export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
+fi
+
 # Added by the Postman CLI installer
 export PATH="$HOME/.local/bin:$PATH"
 

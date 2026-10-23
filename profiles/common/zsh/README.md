@@ -15,7 +15,8 @@ shells, so both run in a new window or tab.
     `op plugin init` generates that file, so it isn't tracked.
   - `PATH` additions: `~/go/bin` (Go tools, e.g. the handoff helper), rustup's
     `bin` folder (Homebrew's rustup doesn't add it) and `~/.cargo/bin`
-    (`cargo install` tools) if they exist, and `~/.local/bin` (Postman CLI).
+    (`cargo install` tools) if they exist, Homebrew's `openjdk` (keg-only, so
+    not linked by Homebrew) with `JAVA_HOME`, and `~/.local/bin` (Postman CLI).
   - `~/.zshrc.local` last, if it exists: machine-specific settings (work hosts,
     tokens, local paths). Not tracked; this repo is public.
 

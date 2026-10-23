@@ -67,12 +67,13 @@
 | `typescript.lua` | vtsls; ESLint in projects with an ESLint config | Prettier
 | `python.lua` | basedpyright (type checking `standard`); Ruff | Ruff: organize
 | `shell.lua` (sh, bash; not zsh) | bash-language-server | shfmt, 2-space indent
-| `latex.lua` | texlab: build with latexmk (`:LspTexlabBuild`), forward search
-to Skim (`:LspTexlabForward`) | tex-fmt | chktex on save (through texlab) |
-unless the project has an `.editorconfig` | shellcheck (through
-bash-language-server) | imports, then format | Ruff (through its language
-server) | (a project's own, if installed) | ESLint (through its language server)
-|
+| `latex.lua` | texlab: build with latexmk (`:LspTexlabBuild`), forward search |
+`java.lua` | jdtls (type checking needs a project root: `.git`, `pom.xml`,
+`build.gradle`, …) | google-java-format | jdtls | to Skim (`:LspTexlabForward`)
+| tex-fmt | chktex on save (through texlab) | unless the project has an
+`.editorconfig` | shellcheck (through bash-language-server) | imports, then
+format | Ruff (through its language server) | (a project's own, if installed) |
+ESLint (through its language server) |
 
 - Nerd Font icons are on (`vim.g.have_nerd_font = true` in
   `lua/custom/config/options.lua`): kickstart then loads mini.icons (also
