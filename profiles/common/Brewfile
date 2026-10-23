@@ -30,6 +30,7 @@ brew "gopls" # Go language server
 brew "goimports"
 brew "gofumpt"
 brew "golangci-lint"
+brew "delve" # Go debugger (dlv), used by Neovim's debug module
 brew "vtsls" # TypeScript/JavaScript language server
 brew "vscode-langservers-extracted" # ESLint, HTML, CSS and JSON language servers
 brew "basedpyright" # Python language server
