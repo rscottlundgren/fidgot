@@ -2,6 +2,41 @@
 
 My dotfiles and app config, shared across machines.
 
+## Set up a machine
+
+On a new Mac, install Apple's Command Line Tools (for `git`), clone this repo
+(it's public, so HTTPS needs no sign-in) and run `install.sh`:
+
+```sh
+xcode-select --install
+git clone https://github.com/rscottlundgren/fidgot.git ~/git/github/rscottlundgren/fidgot
+cd ~/git/github/rscottlundgren/fidgot
+./install.sh --profile personal --dry-run   # preview
+./install.sh --profile personal
+```
+
+On a work machine, use that machine's profile name instead of `personal` (e.g.
+`./install.sh --profile <work-profile>`): it installs only the common Brewfile,
+and passes the name to the coding-agent setup.
+
+`install.sh` runs these steps, each skipping what's already in place, so it's
+safe to rerun (`--skip <steps>` leaves some out):
+
+1. `xcode`: Command Line Tools.
+2. `brew`: Homebrew, then the Brewfiles (installs what's missing; doesn't
+   upgrade).
+3. `links`: links every tracked config into place (the Config table below);
+   anything in the way is renamed `*.bak-<timestamp>`.
+4. `toolchains`: Rust's stable toolchain and rust-analyzer (rustup), nvm with
+   Node LTS, and pnpm through corepack.
+5. `nvim`: Neovim plugins at the lockfile's revisions.
+6. `agents`: the coding-agent config
+   ([`profiles/common/agents/`](profiles/common/agents/README.md)), which needs
+   `gh auth login` first.
+
+It ends with what's left to do by hand: OrbStack's first launch, 1Password's SSH
+agent, `gh auth login`, git identities, and machine-specific settings.
+
 ## Install
 
 Homebrew installs are listed in Brewfiles, one per profile (see Config below):
