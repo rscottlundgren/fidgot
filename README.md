@@ -154,7 +154,9 @@ Neovim:
 
   Each hunk in `init.lua` falls under a `SECTION N` banner; port it into the
   file for that section (table above). Changes under `lua/kickstart/` copy over
-  as-is. Then write the clone's `git rev-parse HEAD` into `.kickstart-synced`.
+  as-is. `README.md` and `LICENSE.md` here are formatted with Prettier, so port
+  their changes by hand and run `prettier --write` on them. Then write the
+  clone's `git rev-parse HEAD` into `.kickstart-synced`.
 
 ## Third-party clones
 
