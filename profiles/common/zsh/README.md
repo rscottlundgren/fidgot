@@ -13,8 +13,9 @@ shells, so both run in a new window or tab.
     `brew doctor`, `update`, `upgrade` and `cleanup` around it.
   - 1Password CLI shell plugins, from `~/.config/op/plugins.sh` if it exists.
     `op plugin init` generates that file, so it isn't tracked.
-  - `PATH` additions: `~/go/bin` (Go tools, e.g. the handoff helper) and
-    `~/.local/bin` (Postman CLI).
+  - `PATH` additions: `~/go/bin` (Go tools, e.g. the handoff helper), rustup's
+    `bin` folder (Homebrew's rustup doesn't add it) and `~/.cargo/bin`
+    (`cargo install` tools) if they exist, and `~/.local/bin` (Postman CLI).
   - `~/.zshrc.local` last, if it exists: machine-specific settings (work hosts,
     tokens, local paths). Not tracked; this repo is public.
 

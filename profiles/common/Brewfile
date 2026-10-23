@@ -26,6 +26,7 @@ brew "unzip"
 
 # Languages and tooling
 brew "go"
+brew "rustup" # toolchains: rustup default stable; rustup component add rust-analyzer
 brew "prettier"
 brew "markdownlint-cli2"
 brew "openspec"

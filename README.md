@@ -36,6 +36,10 @@ Notes:
   `kubernetes-cli`, which is earlier on `PATH`.
 - Terraform isn't in Homebrew's core repository any more; it comes from
   HashiCorp's tap (`hashicorp/tap`).
+- Rust comes from Homebrew's `rustup`, which manages the toolchains. On a new
+  machine, after `brew bundle install`: `rustup default stable` and
+  `rustup component add rust-analyzer`. Update with `rustup update`. Don't also
+  install Homebrew's `rust` formula; it's a separate toolchain that conflicts.
 
 Installed outside Homebrew:
 
