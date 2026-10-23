@@ -1,0 +1,25 @@
+// Project settings for Zed in this repo.
+// The lua-language-server settings mirror .luarc.json (which takes precedence
+// when present), so Zed knows the Neovim `vim` global and plugin types in
+// profiles/common/nvim.
+{
+  "lsp": {
+    "lua-language-server": {
+      "settings": {
+        "Lua": {
+          "runtime": {
+            "version": "LuaJIT",
+            "path": ["lua/?.lua", "lua/?/init.lua"],
+          },
+          "workspace": {
+            "checkThirdParty": false,
+            "library": [
+              "/opt/homebrew/share/nvim/runtime",
+              "~/.local/share/nvim/site/pack/core/opt",
+            ],
+          },
+        },
+      },
+    },
+  },
+}

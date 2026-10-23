@@ -57,6 +57,8 @@
     "Shell Script": { "wrap_guides": [80], "preferred_line_length": 80 },
     // Taplo default (80).
     "TOML": { "wrap_guides": [80], "preferred_line_length": 80 },
+    // StyLua default (120); kickstart's .stylua.toml (Neovim config) uses 160.
+    "Lua": { "wrap_guides": [120, 160], "preferred_line_length": 120 },
     // Common LaTeX convention (80).
     "LaTeX": { "wrap_guides": [80], "preferred_line_length": 80 },
   },
