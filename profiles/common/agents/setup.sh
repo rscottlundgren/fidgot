@@ -14,7 +14,7 @@ while [ $# -gt 0 ]; do
   case "$1" in
   --profile)
     profile="${2:-}"
-    shift 2
+    shift $(($# > 1 ? 2 : 1)) # with no value, fall through to the usage message
     ;;
   --dry-run)
     dry_run=true
