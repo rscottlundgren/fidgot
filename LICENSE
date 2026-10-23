@@ -1,0 +1,13 @@
+Copyright (c) 2026 R. Scott Lundgren. All rights reserved.
+
+This repository is public so it can be read and used for reference, and so my
+own machines can install from it. It is not yet licensed for reuse: no
+permission is granted to copy, modify, distribute or use its contents, except
+as GitHub's Terms of Service allow (viewing and forking on GitHub).
+
+An open-source license is planned, to be chosen once the repository is ready
+for reuse.
+
+Third-party parts keep their own licenses. profiles/common/nvim/ is derived
+from kickstart.nvim and stays under kickstart's MIT License
+(profiles/common/nvim/LICENSE.md).

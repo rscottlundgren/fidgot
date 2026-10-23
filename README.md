@@ -99,3 +99,12 @@ Check Markdown before committing:
 prettier --check '**/*.md'      # or --write to format
 markdownlint-cli2 '**/*.md'     # or --fix for what it can fix itself
 ```
+
+## License
+
+Not licensed for reuse yet: the repo is public for reference, and everything in
+it is copyright R. Scott Lundgren with all rights reserved (see
+[`LICENSE`](LICENSE)). An open-source license is planned once the repo is ready
+for others to use. The Neovim config in `profiles/common/nvim/` is derived from
+kickstart.nvim and keeps its MIT license
+([`LICENSE.md`](profiles/common/nvim/LICENSE.md)).
