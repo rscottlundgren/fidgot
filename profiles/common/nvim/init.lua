@@ -98,6 +98,7 @@ require 'custom.plugins.lsp' -- Section 6
 require 'custom.plugins.formatting' -- Section 7
 require 'custom.plugins.completion' -- Section 8
 require 'custom.plugins.treesitter' -- Section 9
+require 'custom.plugins.markdown' -- not from upstream (render-markdown.nvim)
 
 -- ============================================================
 -- SECTION 10: OPTIONAL EXAMPLES / NEXT STEPS
