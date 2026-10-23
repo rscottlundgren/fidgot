@@ -3,5 +3,8 @@
   "runtime.version": "LuaJIT",
   "runtime.path": ["lua/?.lua", "lua/?/init.lua"],
   "workspace.checkThirdParty": false,
-  "workspace.library": ["/opt/homebrew/share/nvim/runtime", "~/.local/share/nvim/site/pack/core/opt"]
+  "workspace.library": [
+    "/opt/homebrew/share/nvim/runtime",
+    "~/.local/share/nvim/site/pack/core/opt"
+  ]
 }
