@@ -112,6 +112,7 @@ require 'custom.languages.java'
 require 'custom.languages.web'
 require 'custom.languages.data'
 require 'custom.languages.rust'
+require 'custom.languages.zig'
 
 -- ============================================================
 -- SECTION 10: OPTIONAL EXAMPLES / NEXT STEPS
