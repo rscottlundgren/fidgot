@@ -87,6 +87,12 @@
   which-key and the statusline, and render-markdown uses mini.icons for code
   block icons. The terminal must use a Nerd Font; Ghostty's is CommitMono Nerd
   Font Mono (see [Ghostty](../ghostty/README.md)).
+- Spell checking is on for Markdown, git commit messages, LaTeX and plain text
+  (`lua/custom/config/spell.lua`): `]s` / `[s` jump between misspellings, `z=`
+  suggests, `zg` adds a word to the word list, `zw` marks one wrong. The word
+  list, `spell/en.utf-8.add`, is tracked so added words follow you to every
+  machine. Neovim reads a compiled copy (`*.spl`, not tracked), which the module
+  rebuilds when it's missing or older than the word list, e.g. after `git pull`.
 - Machine-specific settings (work hostnames, paths, anything not for a public
   repo) go in `lua/custom/local.lua`. It's git-ignored, and `init.lua` loads it
   only if it exists.
