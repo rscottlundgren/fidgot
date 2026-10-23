@@ -108,6 +108,7 @@ require 'custom.languages.typescript'
 require 'custom.languages.python'
 require 'custom.languages.shell'
 require 'custom.languages.latex'
+require 'custom.languages.java'
 
 -- ============================================================
 -- SECTION 10: OPTIONAL EXAMPLES / NEXT STEPS
