@@ -82,6 +82,26 @@ Neovim:
   revisions. After `git pull` here, sync installed plugins to it with
   `:lua vim.pack.update(nil, { target = 'lockfile' })`. To update plugins, run
   `:lua vim.pack.update()` and commit the lockfile.
+- Upstream keeps everything in one `init.lua`; here each of its sections is
+  its own module under `lua/custom/` (the folder upstream promises never to
+  touch), and `init.lua` requires them in a fixed order:
+
+  | Upstream `init.lua` section | File here |
+  | --- | --- |
+  | Header comment, 10: Optional examples | `init.lua` |
+  | 1: Options | `lua/custom/config/options.lua` |
+  | 2: Keymaps & autocmds | `lua/custom/config/keymaps.lua`, `lua/custom/config/autocmds.lua` |
+  | 3: Plugin manager intro (and the `gh()` helper) | `lua/custom/config/pack.lua` |
+  | 4: UI / core UX plugins | `lua/custom/plugins/ui.lua` |
+  | 5: Search & navigation | `lua/custom/plugins/telescope.lua` |
+  | 6: LSP | `lua/custom/plugins/lsp.lua` |
+  | 7: Formatting | `lua/custom/plugins/formatting.lua` |
+  | 8: Autocomplete & snippets | `lua/custom/plugins/completion.lua` |
+  | 9: Treesitter | `lua/custom/plugins/treesitter.lua` |
+
+  `lua/kickstart/` (upstream's optional plugins) is kept identical to upstream.
+  Upstream's `lua/custom/plugins/init.lua` auto-loader was removed: it loads
+  files in no fixed order and would load these modules a second time.
 - Machine-specific settings (work hostnames, paths, anything not for a public
   repo) go in `lua/custom/local.lua`. It's git-ignored, and `init.lua` loads it
   only if it exists.
@@ -95,7 +115,9 @@ Neovim:
   git diff $(cat ~/git/github/rscottlundgren/fidgot/profiles/common/nvim/.kickstart-synced)..HEAD
   ```
 
-  Port what's wanted, then write the clone's `git rev-parse HEAD` into
+  Each hunk in `init.lua` falls under a `SECTION N` banner; port it into the
+  file for that section (table above). Changes under `lua/kickstart/` copy
+  over as-is. Then write the clone's `git rev-parse HEAD` into
   `.kickstart-synced`.
 
 # Third-party clones
