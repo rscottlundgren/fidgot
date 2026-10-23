@@ -51,10 +51,10 @@ folder first.
 
 Config is grouped into profiles by which machines use it:
 
-| Profile              | For                               | Contains                                               |
-| -------------------- | --------------------------------- | ------------------------------------------------------ |
-| `profiles/common/`   | Every machine (personal and work) | Brewfile, zsh, git, gh, Neovim, Ghostty, Starship, Zed |
-| `profiles/personal/` | The personal machine only         | Brewfile, `life-ops` scripts                           |
+| Profile              | For                               | Contains                                                    |
+| -------------------- | --------------------------------- | ----------------------------------------------------------- |
+| `profiles/common/`   | Every machine (personal and work) | Brewfile, zsh, git, gh, ssh, Neovim, Ghostty, Starship, Zed |
+| `profiles/personal/` | The personal machine only         | Brewfile, `life-ops` scripts                                |
 
 Config starts in `common/`. Something moves to a machine-specific profile only
 when it has to differ between machines; a work profile would sit next to
@@ -72,6 +72,7 @@ tool.
 | [zsh](profiles/common/zsh/README.md)           | `profiles/common/zsh/` (`zshrc`, `zprofile`)             | `~/.zshrc`, `~/.zprofile`              |
 | [git](profiles/common/git/README.md)           | `profiles/common/git/` (`gitconfig`, `ignore`)           | `~/.gitconfig`, `~/.config/git/ignore` |
 | [gh](profiles/common/gh/README.md)             | `profiles/common/gh/config.yml`                          | `~/.config/gh/config.yml`              |
+| [ssh](profiles/common/ssh/README.md)           | `profiles/common/ssh/` (`config`, GitHub public keys)    | `~/.ssh/config`, `~/.ssh/*.pub`        |
 | [Neovim](profiles/common/nvim/README.md)       | `profiles/common/nvim/` (kickstart.nvim, modularized)    | `~/.config/nvim` (whole directory)     |
 | [Ghostty](profiles/common/ghostty/README.md)   | `profiles/common/ghostty/` (`config.ghostty`, `themes/`) | `~/.config/ghostty` (whole directory)  |
 | [Starship](profiles/common/starship/README.md) | `profiles/common/starship/starship.toml`                 | `~/.config/starship.toml`              |

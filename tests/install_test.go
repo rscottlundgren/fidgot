@@ -21,6 +21,9 @@ var links = map[string]string{
 	".gitconfig":            "profiles/common/git/gitconfig",
 	".config/git/ignore":    "profiles/common/git/ignore",
 	".config/gh/config.yml": "profiles/common/gh/config.yml",
+	".ssh/config":           "profiles/common/ssh/config",
+	".ssh/github_rscottlundgren_auth_id_ed25519.pub": "profiles/common/ssh/github_rscottlundgren_auth_id_ed25519.pub",
+	".ssh/github_studioelif_auth_id_ed25519.pub":     "profiles/common/ssh/github_studioelif_auth_id_ed25519.pub",
 }
 
 // installLinks runs install.sh with every step but links skipped, in home.
@@ -65,6 +68,9 @@ func TestInstallCreatesLinks(t *testing.T) {
 		if want := filepath.Join(root, src); got != want {
 			t.Errorf("~/%s -> %s, want %s", dest, got, want)
 		}
+	}
+	if info, err := os.Stat(filepath.Join(home, ".ssh")); err != nil || info.Mode().Perm() != 0o700 {
+		t.Errorf("~/.ssh should be mode 700: %v", err)
 	}
 	// Every link install.sh made is one this test knows about
 	for _, entry := range snapshot(t, home) {

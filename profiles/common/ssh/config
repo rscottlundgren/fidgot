@@ -1,0 +1,28 @@
+# SSH client config. Linked to ~/.ssh/config; see README.md in this folder.
+
+# Machine-specific hosts and settings (not tracked). First, because for each
+# setting SSH uses the first value it finds.
+Include ~/.ssh/config.local
+
+# Added by OrbStack: 'orb' SSH host for Linux machines. Has to come before any
+# Host block; ignored where OrbStack isn't installed.
+Include ~/.orbstack/ssh/config
+
+# One alias per GitHub account, each offering only that account's key (the
+# public key here picks the private key in 1Password). Clone with
+# git@github.com-<account>:<owner>/<repo>.git.
+Host github.com-rscottlundgren
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/github_rscottlundgren_auth_id_ed25519.pub
+  IdentitiesOnly yes
+
+Host github.com-studioelif
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/github_studioelif_auth_id_ed25519.pub
+  IdentitiesOnly yes
+
+# Keys come from 1Password's SSH agent
+Host *
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
