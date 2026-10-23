@@ -34,3 +34,22 @@ untracked, used with `ssh -i` or an `IdentityFile` in `config.local`.
 
 Check a host's settings without connecting:
 `ssh -G github.com-rscottlundgren | grep -E '^(hostname|user|identityfile) '`.
+
+## If SSH stops working
+
+`~/.ssh/config` and the keys link into this checkout, so checking out a commit
+or branch from before they were added removes them. Every GitHub alias then
+fails, this repo's own remote included:
+
+```text
+ssh: Could not resolve hostname github.com-rscottlundgren: nodename nor servname provided, or not known
+```
+
+Switch back to `main`, which needs no network: `git switch main`. If your local
+`main` doesn't have the files yet (e.g. right after merging the change that
+added them), pull it over HTTPS instead, which works without signing in because
+the repo is public:
+
+```sh
+git pull --ff-only https://github.com/rscottlundgren/fidgot.git main
+```
