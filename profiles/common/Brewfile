@@ -30,6 +30,8 @@ brew "gopls" # Go language server
 brew "goimports"
 brew "gofumpt"
 brew "golangci-lint"
+brew "vtsls" # TypeScript/JavaScript language server
+brew "vscode-langservers-extracted" # ESLint, HTML, CSS and JSON language servers
 brew "rustup" # toolchains: rustup default stable; rustup component add rust-analyzer
 brew "zig"
 brew "zls" # Zig language server; must match Zig's release (upgrade together)
