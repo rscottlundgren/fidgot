@@ -1,9 +1,9 @@
-# Fast capture: log "called X about Y — next step Z"
+# Fast capture: jot "called X about Y — next step Z"
 # Inserts under the '## Log' header; falls back to file-append if that header
 # is missing, so a capture is never silently lost.
-log() {
+jot() {
   if [ -z "$*" ]; then
-    echo "usage: log <what happened>"
+    echo "usage: jot <what happened>"
     return 1
   fi
   local f ts entry tmp
