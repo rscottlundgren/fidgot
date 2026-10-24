@@ -15,8 +15,8 @@
   machine-specific settings, e.g. a work identity for a work folder with its own
   `includeIf`.
 
-`ignore` is the global ignore list (currently Claude Code's per-project
-`settings.local.json`).
+`ignore` is the global ignore list: macOS Finder's `.DS_Store` files and Claude
+Code's per-project `settings.local.json`.
 
 ## Not in this repo
 
