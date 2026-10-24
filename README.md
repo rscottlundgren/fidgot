@@ -51,6 +51,9 @@ people's repos go in `~/git/github/<account>/_third-party/<owner>/<repo>` (e.g.
 projects but still under the account's identity; the leading `_` sorts the
 folder first.
 
+How fidgot fits with its private companion repos, and the security reasoning
+behind that split, is in [`ARCHITECTURE.md`](ARCHITECTURE.md).
+
 ## Profiles
 
 Config is grouped into profiles by which machines use it:
