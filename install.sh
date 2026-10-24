@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 # Set up a Mac from fidgot: Homebrew and the Brewfiles, config links,
-# toolchains, Neovim plugins and the coding-agent config. Safe to rerun:
-# every step checks first and skips what's already in place.
+# toolchains, Neovim plugins, the coding-agent config and, on the personal
+# profile, the personal tools. Safe to rerun: every step checks first and
+# skips what's already in place.
 #
 # Usage: ./install.sh --profile <personal|work-profile-name> [--dry-run] [--skip <steps>]
-#   --profile   personal: common + personal Brewfiles and the personal agent
-#               setup. Any other name is a work machine: common only, and the
-#               name is passed to the agent setup as its profile.
+#   --profile   personal: common + personal Brewfiles, the personal agent
+#               setup and the personal tools. Any other name is a work machine:
+#               common only, and the name is passed to the agent setup as its profile.
 #   --dry-run   show what would change; change nothing
 #   --skip      comma-separated steps to leave out:
-#               xcode,brew,links,toolchains,nvim,agents
+#               xcode,brew,links,toolchains,nvim,agents,tools
 
 set -euo pipefail
 
@@ -211,6 +212,16 @@ if ! skipped agents; then
   $dry_run && args+=(--dry-run)
   if ! "$repo/profiles/common/agents/setup.sh" "${args[@]}"; then
     manual+=("Coding-agent config: sign in with \`gh auth login\`, then rerun with --skip xcode,brew,links,toolchains,nvim")
+  fi
+fi
+
+# --- Personal tools (personal profile only) ------------------------------------------------
+if [ "$profile" = personal ] && ! skipped tools; then
+  step "Personal tools (fidgot-personal)"
+  args=()
+  $dry_run && args+=(--dry-run)
+  if ! "$repo/profiles/personal/tools/setup.sh" ${args[@]+"${args[@]}"}; then
+    manual+=("Personal tools: sign in with \`gh auth login\`, then rerun with --skip xcode,brew,links,toolchains,nvim,agents")
   fi
 fi
 

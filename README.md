@@ -33,6 +33,10 @@ safe to rerun (`--skip <steps>` leaves some out):
 6. `agents`: the coding-agent config
    ([`profiles/common/agents/`](profiles/common/agents/README.md)), which needs
    `gh auth login` first.
+7. `tools` (personal profile only): the personal tools from the private
+   `fidgot-personal` repo
+   ([`profiles/personal/tools/`](profiles/personal/tools/README.md)), which also
+   needs `gh auth login` first.
 
 It ends with what's left to do by hand: OrbStack's first launch, 1Password's SSH
 agent, `gh auth login`, git identities, and machine-specific settings.
@@ -47,6 +51,9 @@ people's repos go in `~/git/github/<account>/_third-party/<owner>/<repo>` (e.g.
 projects but still under the account's identity; the leading `_` sorts the
 folder first.
 
+How fidgot fits with its private companion repos, and the security reasoning
+behind that split, is in [`ARCHITECTURE.md`](ARCHITECTURE.md).
+
 ## Profiles
 
 Config is grouped into profiles by which machines use it:
@@ -54,7 +61,7 @@ Config is grouped into profiles by which machines use it:
 | Profile              | For                               | Contains                                                    |
 | -------------------- | --------------------------------- | ----------------------------------------------------------- |
 | `profiles/common/`   | Every machine (personal and work) | Brewfile, zsh, git, gh, ssh, Neovim, Ghostty, Starship, Zed |
-| `profiles/personal/` | The personal machine only         | Brewfile, `life-ops` scripts                                |
+| `profiles/personal/` | The personal machine only         | Brewfile, `life-ops` scripts, personal tools setup          |
 
 Config starts in `common/`. Something moves to a machine-specific profile only
 when it has to differ between machines; a work profile would sit next to

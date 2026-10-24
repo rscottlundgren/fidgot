@@ -116,7 +116,7 @@ func need(t *testing.T, tools ...string) {
 	t.Helper()
 	for _, tool := range tools {
 		if _, err := exec.LookPath(tool); err != nil {
-			t.Fatalf("%s isn't on PATH (install the Brewfiles: install.sh --skip links,toolchains,nvim,agents)", tool)
+			t.Fatalf("%s isn't on PATH (install the Brewfiles: install.sh --skip links,toolchains,nvim,agents,tools)", tool)
 		}
 	}
 }

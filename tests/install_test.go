@@ -29,7 +29,7 @@ var links = map[string]string{
 // installLinks runs install.sh with every step but links skipped, in home.
 func installLinks(t *testing.T, home string, extra ...string) result {
 	t.Helper()
-	args := append([]string{"--profile", "personal", "--skip", "xcode,brew,toolchains,nvim,agents"}, extra...)
+	args := append([]string{"--profile", "personal", "--skip", "xcode,brew,toolchains,nvim,agents,tools"}, extra...)
 	return mustSucceed(t, cmd{name: "./install.sh", args: args, env: baseEnv(home)})
 }
 
