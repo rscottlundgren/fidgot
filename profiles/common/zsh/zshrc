@@ -45,5 +45,9 @@ fi
 # Added by the Postman CLI installer
 export PATH="$HOME/.local/bin:$PATH"
 
+# Directory listings with eza ("eza ls"): folders first, icons, git status.
+# Flags pass through: els -l (details), els -la (with dotfiles), els -T -L2 (tree)
+command -v eza >/dev/null && alias els='eza --group-directories-first --icons --git --time-style=relative'
+
 # Machine-specific settings (not tracked)
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"

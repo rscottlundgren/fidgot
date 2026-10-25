@@ -28,7 +28,7 @@ including rust-analyzer from rustup and lua-language-server from Mason.
 | `hygiene_test.go`        | shellcheck and shfmt on the scripts, `zsh -n` on the zsh config, stylua, gofmt, Prettier and markdownlint                                                                                      |
 | `install_test.go`        | `install.sh` in an empty temporary `HOME` (links step only): every link made, a second run changes nothing, a file in the way is backed up, `--dry-run` changes nothing, bad arguments exit 2  |
 | `agents_test.go`         | `agents/setup.sh`: arguments, and a dry run doesn't clone                                                                                                                                      |
-| `zsh_test.go`            | A login shell with the tracked config: nothing on stderr, the expected `PATH` entries, `~/.zshrc.local` loaded only when present                                                               |
+| `zsh_test.go`            | A login shell with the tracked config: nothing on stderr, the expected `PATH` entries, `~/.zshrc.local` loaded only when present, `els` passes its flags to eza                                |
 | `nvim_test.go`           | Headless Neovim with the repo's config: clean start with every plugin loaded, `:checkhealth kickstart`, spell checking on for prose and off for code, Lua and Markdown format on save          |
 | `languages_slow_test.go` | `--slow` only: for each language module, its fixture gets the language server, the expected diagnostic and the expected formatting; lua-language-server finds no warnings in the Neovim config |
 
