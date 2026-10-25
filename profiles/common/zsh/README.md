@@ -17,6 +17,9 @@ shells, so both run in a new window or tab.
     `bin` folder (Homebrew's rustup doesn't add it) and `~/.cargo/bin`
     (`cargo install` tools) if they exist, Homebrew's `openjdk` (keg-only, so
     not linked by Homebrew) with `JAVA_HOME`, and `~/.local/bin` (Postman CLI).
+  - `els`, if eza is installed: `eza` with folders first, icons, and git status
+    and relative times in long views. Flags pass through: `els -l`, `els -la`,
+    `els -T -L2` (tree). Plain `ls` is unchanged.
   - `~/.zshrc.local` last, if it exists: machine-specific settings (work hosts,
     tokens, local paths). Not tracked; this repo is public.
 

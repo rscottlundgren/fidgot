@@ -19,6 +19,7 @@ cask "visual-studio-code"
 brew "ripgrep"
 brew "fd"
 brew "tree"
+brew "eza" # ls replacement (zshrc's els): folders first, icons, git status
 brew "tree-sitter-cli"
 brew "make"
 brew "gcc"
