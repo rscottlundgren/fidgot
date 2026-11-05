@@ -1,8 +1,11 @@
 package tests
 
 import (
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
+	"unicode/utf8"
 )
 
 // The linters and formatters the repo's files are kept clean with.
@@ -39,6 +42,22 @@ func TestZshSyntax(t *testing.T) {
 func TestZshShellcheck(t *testing.T) {
 	need(t, "shellcheck")
 	mustSucceed(t, cmd{name: "shellcheck", args: zshFiles(t)})
+}
+
+// The zsh config stays within 80 columns (profiles/common/zsh/README.md,
+// Conventions).
+func TestZshLineLength(t *testing.T) {
+	for _, f := range zshFiles(t) {
+		data, err := os.ReadFile(filepath.Join(root, f))
+		if err != nil {
+			t.Fatal(err)
+		}
+		for i, line := range strings.Split(string(data), "\n") {
+			if n := utf8.RuneCountInString(line); n > 80 {
+				t.Errorf("%s:%d is %d columns, over 80", f, i+1, n)
+			}
+		}
+	}
 }
 
 func TestLuaFormatting(t *testing.T) {

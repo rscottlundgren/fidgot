@@ -26,17 +26,23 @@ export PATH="$HOME/go/bin:$PATH"
 # rustup from Homebrew (its rustc, cargo, rust-analyzer, ... aren't on PATH by
 # default), and tools installed with `cargo install`
 
-[ -d "$HOMEBREW_PREFIX/opt/rustup/bin" ] && export PATH="$HOMEBREW_PREFIX/opt/rustup/bin:$PATH"
-[ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
+if [ -d "$HOMEBREW_PREFIX/opt/rustup/bin" ]; then
+  export PATH="$HOMEBREW_PREFIX/opt/rustup/bin:$PATH"
+fi
+if [ -d "$HOME/.cargo/bin" ]; then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
 
 # ------ Java ----------------------------------------------
 # Homebrew's openjdk is keg-only (not linked), so put it on PATH and set
 # JAVA_HOME; macOS's /usr/bin/java stub only finds JDKs in /Library/Java
 
-if [ -d "$HOMEBREW_PREFIX/opt/openjdk/libexec/openjdk.jdk" ]; then
-  export JAVA_HOME="$HOMEBREW_PREFIX/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
-  export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
+openjdk="$HOMEBREW_PREFIX/opt/openjdk"
+if [ -d "$openjdk/libexec/openjdk.jdk" ]; then
+  export JAVA_HOME="$openjdk/libexec/openjdk.jdk/Contents/Home"
+  export PATH="$openjdk/bin:$PATH"
 fi
+unset openjdk
 
 # ------ ~/.local/bin --------------------------------------
 # Added by the Postman CLI installer
@@ -56,7 +62,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # Directory listings ("eza ls"): folders first, icons, git status. Flags pass
 # through: els -l (details), els -la (with dotfiles), els -T -L2 (tree)
 
-command -v eza >/dev/null && alias els='eza --group-directories-first --icons --git --time-style=relative'
+if command -v eza >/dev/null; then
+  alias els='eza --group-directories-first --icons --git --time-style=relative'
+fi
 
 # --- Shell functions ----------------------------------------------------------
 # brew-in, brew-un, brew-up, ...: every functions/*.zsh next to this file.

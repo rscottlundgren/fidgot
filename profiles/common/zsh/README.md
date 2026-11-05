@@ -52,6 +52,8 @@ or two of comment under a rule says what the block is for. Subsections group one
 tool or toolchain each (Node, Go, Rust, ...); a section with a single block
 doesn't need them.
 
+Lines stay within 80 columns (`TestZshLineLength` checks): a long one-liner
+becomes an `if` block, and a long path goes in a variable that's `unset` after.
 Comments go on their own line, above the code they describe, not at the end of a
 line. An end-of-line comment either pushes the line past 80 columns or has to be
 lined up by hand.
