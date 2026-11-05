@@ -43,13 +43,27 @@ comment rule. The top level is the same as `install.sh`'s sections:
 
 ```zsh
 # --- Section ------------------------------------------------------------------
-# -- Subsection --------------------------
+# ------ Subsection ----------------------------------------
 ```
 
-A section rule runs to 80 columns; a subsection rule runs to 40, so it reads as
-one level down. A line or two of comment under a rule says what the block is
-for. Subsections group one tool or toolchain each (Node, Go, Rust, ...); a
-section with a single block doesn't need them.
+The number of leading dashes gives the level, and a subsection rule stops at
+column 60, so it reads as one level down from an 80-column section rule. A line
+or two of comment under a rule says what the block is for. Subsections group one
+tool or toolchain each (Node, Go, Rust, ...); a section with a single block
+doesn't need them.
+
+Comments go on their own line, above the code they describe, not at the end of a
+line. An end-of-line comment either pushes the line past 80 columns or has to be
+lined up by hand.
+
+shellcheck reads these files as bash, and each one says so on its first line.
+`zshrc` and `zprofile` also turn off SC1090 and SC1091 there, for the whole
+file, since every file they source (nvm, 1Password's plugins, OrbStack,
+`~/.zshrc.local`, `functions/*.zsh`) only exists at runtime:
+
+```zsh
+# shellcheck shell=bash disable=SC1090,SC1091
+```
 
 Variables use full words (`directory`, `file`), and variables inside a function
 are `local`. Two kinds of names stay as they are:

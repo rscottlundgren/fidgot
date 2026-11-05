@@ -1,4 +1,5 @@
-# shellcheck shell=bash
+# shellcheck shell=bash disable=SC1090,SC1091
+# (shellcheck reads zsh as bash; every file sourced here only exists at runtime)
 # Login shell setup. Linked to ~/.zprofile; see README.md in this folder.
 
 # --- Homebrew -----------------------------------------------------------------
@@ -14,5 +15,4 @@ fi
 
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
-# shellcheck source=/dev/null
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
