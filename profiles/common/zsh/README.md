@@ -32,13 +32,17 @@ or move them to `~/.zshrc.local` if they're machine-specific.
 ## Shell functions
 
 `zshrc` sources every `functions/*.zsh` file without naming them, so adding a
-file is enough. One file per subject:
+file is enough. They're sourced from inside a function, so a file should only
+define functions: a `setopt` or `local` at its top level wouldn't outlast the
+loading. One file per subject:
 
 - `brew.zsh`: `brew-in` / `brew-un` / `brew-up` install, uninstall or upgrade
-  with `brew doctor`, `update`, `upgrade` and `cleanup` around it. `brew-in` and
-  `brew-un` need at least one formula or cask. A failed `update`, install or
-  uninstall stops before `cleanup`; a failed `upgrade` doesn't block the
-  install, and `doctor`'s warnings don't count as a failure.
+  with `brew doctor`, `update`, `upgrade --greedy` and `cleanup` around it.
+  `brew-in` and `brew-un` need at least one formula or cask. A failed `update`,
+  install or uninstall stops before `cleanup`; a failed `upgrade` doesn't block
+  the install, and `doctor`'s warnings don't count as a failure. `--greedy` also
+  upgrades casks that update themselves (browsers, editors, 1Password) or are
+  versioned `latest`, which `brew upgrade` skips on its own.
 
 Keep functions for things that are only typed at a prompt or have to change the
 current shell. A command that other scripts should be able to run belongs on

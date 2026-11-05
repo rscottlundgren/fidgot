@@ -106,15 +106,15 @@ func TestZshBrewFunctions(t *testing.T) {
 		code          int
 		calls         []string
 	}{
-		{"brew-in wget jq", "", 0, []string{"doctor", "update", "upgrade", "install wget jq", "cleanup", "doctor"}},
-		{"brew-un wget", "", 0, []string{"doctor", "update", "upgrade", "uninstall wget", "cleanup", "doctor"}},
-		{"brew-up", "", 0, []string{"doctor", "update", "upgrade", "cleanup", "doctor"}},
+		{"brew-in wget jq", "", 0, []string{"doctor", "update", "upgrade --greedy", "install wget jq", "cleanup", "doctor"}},
+		{"brew-un wget", "", 0, []string{"doctor", "update", "upgrade --greedy", "uninstall wget", "cleanup", "doctor"}},
+		{"brew-up", "", 0, []string{"doctor", "update", "upgrade --greedy", "cleanup", "doctor"}},
 		{"brew-in", "", 2, nil},
 		{"brew-un", "", 2, nil},
 		{"brew-in wget", "update", 1, []string{"doctor", "update"}},
-		{"brew-in wget", "install", 1, []string{"doctor", "update", "upgrade", "install wget"}},
-		{"brew-in wget", "upgrade", 0, []string{"doctor", "update", "upgrade", "install wget", "cleanup", "doctor"}},
-		{"brew-up", "doctor", 0, []string{"doctor", "update", "upgrade", "cleanup", "doctor"}},
+		{"brew-in wget", "install", 1, []string{"doctor", "update", "upgrade --greedy", "install wget"}},
+		{"brew-in wget", "upgrade", 0, []string{"doctor", "update", "upgrade --greedy", "install wget", "cleanup", "doctor"}},
+		{"brew-up", "doctor", 0, []string{"doctor", "update", "upgrade --greedy", "cleanup", "doctor"}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.command+"/fail="+tt.fail, func(t *testing.T) {

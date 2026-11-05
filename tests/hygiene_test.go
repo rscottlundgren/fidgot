@@ -20,11 +20,25 @@ func TestShellScripts(t *testing.T) {
 	})
 }
 
+// The zsh config: zshrc, zprofile and the functions/*.zsh files it sources.
+func zshFiles(t *testing.T) []string {
+	t.Helper()
+	return tracked(t, "zshrc", "zprofile", "*.zsh")
+}
+
 func TestZshSyntax(t *testing.T) {
 	need(t, "zsh")
-	for _, f := range []string{"profiles/common/zsh/zshrc", "profiles/common/zsh/zprofile"} {
+	for _, f := range zshFiles(t) {
 		mustSucceed(t, cmd{name: "zsh", args: []string{"-n", f}})
 	}
+}
+
+// shellcheck doesn't know zsh, so the zsh config is written in syntax bash also
+// parses and says `# shellcheck shell=bash`; this keeps it that way, matching
+// what bash-language-server shows in the editor.
+func TestZshShellcheck(t *testing.T) {
+	need(t, "shellcheck")
+	mustSucceed(t, cmd{name: "shellcheck", args: zshFiles(t)})
 }
 
 func TestLuaFormatting(t *testing.T) {
