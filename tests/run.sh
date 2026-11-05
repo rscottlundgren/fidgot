@@ -12,26 +12,29 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
 tags=()
-args=()
-for arg in "$@"; do
-  case "$arg" in
+arguments=()
+for argument in "$@"; do
+  case "$argument" in
   --slow) tags=(-tags slow) ;;
   -h | --help)
     sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'
     exit 0
     ;;
-  *) args+=("$arg") ;;
+  *) arguments+=("$argument") ;;
   esac
 done
 
 status=0
 # -count=1: the results depend on the machine, so never reuse cached ones
-go test -count=1 ${tags[@]+"${tags[@]}"} ${args[@]+"${args[@]}"} ./... || status=$?
+go test -count=1 ${tags[@]+"${tags[@]}"} \
+  ${arguments[@]+"${arguments[@]}"} ./... || status=$?
 
 if command -v brew >/dev/null; then
-  if ! missing="$(brew bundle check --verbose --file ../profiles/common/Brewfile 2>&1)"; then
+  brewfile=../profiles/common/Brewfile
+  if ! missing="$(brew bundle check --verbose --file "$brewfile" 2>&1)"; then
     echo
-    echo "warning: the common Brewfile isn't fully installed (not a test failure):"
+    echo "warning: the common Brewfile isn't fully installed" \
+      "(not a test failure):"
     grep '→' <<<"$missing" | sed 's/^/  /' || true
   fi
 fi

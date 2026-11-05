@@ -53,19 +53,21 @@ need go "brew bundle install --file profiles/common/Brewfile"
 # changes: a pull that can't fast-forward stops with git's message. (Same as
 # profiles/common/agents/setup.sh.)
 clone_or_update() {
-  local name="$1" dir="$base/$1"
-  if [ -d "$dir/.git" ]; then
-    say "$name: updating ($dir)"
-    run git -C "$dir" pull --ff-only --quiet
+  local name="$1" directory="$base/$1"
+  if [ -d "$directory/.git" ]; then
+    say "$name: updating ($directory)"
+    run git -C "$directory" pull --ff-only --quiet
   else
     # The repo is private; over HTTPS, git authenticates through gh
-    if [[ "$remote_base" == https://github.com/* ]] && ! gh auth status >/dev/null 2>&1; then
-      echo "$name is private: sign in first with \`gh auth login\` (git uses gh for GitHub over HTTPS)" >&2
+    if [[ "$remote_base" == https://github.com/* ]] &&
+      ! gh auth status >/dev/null 2>&1; then
+      echo "$name is private: sign in first with \`gh auth login\`" \
+        "(git uses gh for GitHub over HTTPS)" >&2
       exit 1
     fi
-    say "$name: cloning into $dir"
+    say "$name: cloning into $directory"
     run mkdir -p "$base"
-    run git clone --quiet "$remote_base/$name.git" "$dir"
+    run git clone --quiet "$remote_base/$name.git" "$directory"
   fi
 }
 
