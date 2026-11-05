@@ -9,7 +9,7 @@ shells, so both run in a new window or tab.
 - `zshrc`, in sections in this order (each section depends only on the ones
   above it):
   - **Prompt**: Starship (config in [`../starship/`](../starship/README.md)).
-  - **Toolchains and PATH**: nvm, for Node; then `~/go/bin` (Go tools, e.g. the
+  - **Toolchains & PATH**: nvm, for Node; then `~/go/bin` (Go tools, e.g. the
     handoff helper), rustup's `bin` folder (Homebrew's rustup doesn't add it)
     and `~/.cargo/bin` (`cargo install` tools) if they exist, Homebrew's
     `openjdk` (keg-only, so not linked by Homebrew) with `JAVA_HOME`, and
@@ -26,8 +26,7 @@ shells, so both run in a new window or tab.
   - **Machine-specific**, last: `~/.zshrc.local`, if it exists, for work hosts,
     tokens and local paths. Not tracked; this repo is public.
 
-New settings go in the section they belong to, under its `# --- Name ---`
-banner, not at the end of the file.
+New settings go in the section they belong to, not at the end of the file.
 
 Every piece that depends on something being installed is guarded, so the files
 load without errors on a machine that doesn't have it.
@@ -36,6 +35,31 @@ Installers that append to `~/.zshrc` or `~/.zprofile` (as OrbStack and Postman
 did) write through the links into this folder, at the end of the file, after
 `~/.zshrc.local`. Move what they add into its section and commit it, or into
 `~/.zshrc.local` if it's machine-specific.
+
+## Conventions
+
+Shell has no standard for section headers, so these files use two levels of
+comment rule. The top level is the same as `install.sh`'s sections:
+
+```zsh
+# --- Section ------------------------------------------------------------------
+# -- Subsection --------------------------
+```
+
+A section rule runs to 80 columns; a subsection rule runs to 40, so it reads as
+one level down. A line or two of comment under a rule says what the block is
+for. Subsections group one tool or toolchain each (Node, Go, Rust, ...); a
+section with a single block doesn't need them.
+
+Variables use full words (`directory`, `file`), and variables inside a function
+are `local`. Two kinds of names stay as they are:
+
+- Names another tool reads, such as `NVM_DIR`, `JAVA_HOME` and
+  `HOMEBREW_PREFIX`.
+- zsh's special lowercase parameters, which a full word can collide with: `path`
+  is tied to `PATH` (so `local path` empties `PATH` inside that function), and
+  `status`, `options`, `functions`, `commands` and `aliases` are taken too. Pick
+  another word, e.g. `target` for a path.
 
 ## Shell functions
 
