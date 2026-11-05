@@ -14,7 +14,8 @@ while [ $# -gt 0 ]; do
   case "$1" in
   --profile)
     profile="${2:-}"
-    shift $(($# > 1 ? 2 : 1)) # with no value, fall through to the usage message
+    # With no value, fall through to the usage message
+    shift $(($# > 1 ? 2 : 1))
     ;;
   --dry-run)
     dry_run=true
@@ -67,8 +68,10 @@ clone_or_update() {
     run git -C "$directory" pull --ff-only --quiet
   else
     # The repos are private; over HTTPS, git authenticates through gh
-    if [[ "$remote_base" == https://github.com/* ]] && ! gh auth status >/dev/null 2>&1; then
-      echo "$name is private: sign in first with \`gh auth login\` (git uses gh for GitHub over HTTPS)" >&2
+    if [[ "$remote_base" == https://github.com/* ]] &&
+      ! gh auth status >/dev/null 2>&1; then
+      echo "$name is private: sign in first with \`gh auth login\`" \
+        "(git uses gh for GitHub over HTTPS)" >&2
       exit 1
     fi
     say "$name: cloning into $directory"
@@ -80,7 +83,9 @@ clone_or_update() {
 clone_or_update agent-config
 
 agent_config="$base/agent-config"
-install() { (cd "$agent_config" && go run ./cmd/agent-install --profile "$profile" "$@"); }
+install() {
+  (cd "$agent_config" && go run ./cmd/agent-install --profile "$profile" "$@")
+}
 if $dry_run && [ ! -d "$agent_config" ]; then
   say "agent-install: skipped (agent-config isn't cloned yet)"
 elif $dry_run; then

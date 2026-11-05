@@ -1,6 +1,6 @@
 : "${LIFEOPS:=$HOME/git/github/rscottlundgren/life-ops}"
 
-# --- internal helpers -------------------------------------------------------
+# --- internal helpers ---------------------------------------------------------
 
 _lo_today_path() {
   printf '%s/log/%s/%s/%s.md' \

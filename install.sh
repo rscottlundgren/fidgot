@@ -4,10 +4,12 @@
 # profile, the personal tools. Safe to rerun: every step checks first and
 # skips what's already in place.
 #
-# Usage: ./install.sh --profile <personal|work-profile-name> [--dry-run] [--skip <steps>]
+# Usage: ./install.sh --profile <personal|work-profile-name>
+#                     [--dry-run] [--skip <steps>]
 #   --profile   personal: common + personal Brewfiles, the personal agent
-#               setup and the personal tools. Any other name is a work machine:
-#               common only, and the name is passed to the agent setup as its profile.
+#               setup and the personal tools. Any other name is a work
+#               machine: common only, and the name is passed to the agent
+#               setup as its profile.
 #   --dry-run   show what would change; change nothing
 #   --skip      comma-separated steps to leave out:
 #               xcode,brew,links,toolchains,nvim,agents,tools
@@ -22,7 +24,8 @@ while [ $# -gt 0 ]; do
   case "$1" in
   --profile)
     profile="${2:-}"
-    shift $(($# > 1 ? 2 : 1)) # with no value, fall through to the usage message
+    # With no value, fall through to the usage message
+    shift $(($# > 1 ? 2 : 1))
     ;;
   --dry-run)
     dry_run=true
@@ -33,7 +36,7 @@ while [ $# -gt 0 ]; do
     shift 2
     ;;
   -h | --help)
-    sed -n '2,14p' "$0" | sed 's/^# \{0,1\}//'
+    sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'
     exit 0
     ;;
   *)
@@ -43,12 +46,16 @@ while [ $# -gt 0 ]; do
   esac
 done
 [ -n "$profile" ] || {
-  echo "usage: $0 --profile <personal|work-profile-name> [--dry-run] [--skip <steps>]" >&2
+  echo "usage: $0 --profile <personal|work-profile-name>" \
+    "[--dry-run] [--skip <steps>]" >&2
   exit 2
 }
 
 timestamp="$(date +%Y%m%d%H%M%S)"
-manual=() # things a person has to do, printed at the end
+# Things a person has to do, printed at the end. manual_step joins its
+# arguments with spaces, so a long message can be split across lines.
+manual=()
+manual_step() { manual+=("$*"); }
 
 step() { printf '\n==> %s\n' "$*"; }
 note() { printf '    %s\n' "$*"; }
@@ -61,7 +68,7 @@ run() {
 }
 skipped() { [[ "$skip" == *",$1,"* ]]; }
 
-# --- Xcode Command Line Tools (git, compilers) -------------------------------
+# --- Xcode Command Line Tools (git, compilers) --------------------------------
 if ! skipped xcode; then
   step "Xcode Command Line Tools"
   if xcode-select -p >/dev/null 2>&1; then
@@ -85,29 +92,40 @@ if ! skipped brew; then
     note "installed ($(brew --prefix))"
   else
     # Homebrew's own installer (https://brew.sh); asks for an admin password
-    run /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    if ! $dry_run; then eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"; fi
+    homebrew_installer="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+    run /bin/bash -c "$(curl -fsSL "$homebrew_installer")"
+    if ! $dry_run; then
+      eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null ||
+        /usr/local/bin/brew shellenv)"
+    fi
   fi
 
   brewfiles=("$repo/profiles/common/Brewfile")
   [ "$profile" = personal ] && brewfiles+=("$repo/profiles/personal/Brewfile")
   for brewfile in "${brewfiles[@]}"; do
-    step "Brewfile ${brewfile#"$repo"/}"
-    if command -v brew >/dev/null && brew bundle check --file "$brewfile" >/dev/null 2>&1; then
+    brewfile_name="${brewfile#"$repo"/}"
+    step "Brewfile $brewfile_name"
+    if command -v brew >/dev/null &&
+      brew bundle check --file "$brewfile" >/dev/null 2>&1; then
       note "everything installed"
     else
       # Install what's missing; don't upgrade what's already there. App Store
       # apps (the mas lines) fail until the App Store app is signed in, so a
       # failure here is left for you instead of stopping the install.
-      if ! HOMEBREW_BUNDLE_NO_UPGRADE=1 run brew bundle install --file "$brewfile"; then
-        manual+=("Brewfile ${brewfile#"$repo"/}: some installs failed; App Store apps need the App Store app signed in to an Apple Account. Then: brew bundle install --file ${brewfile#"$repo"/}")
+      if ! HOMEBREW_BUNDLE_NO_UPGRADE=1 run brew bundle install \
+        --file "$brewfile"; then
+        manual_step "Brewfile $brewfile_name: some installs failed; App Store" \
+          "apps need the App Store app signed in to an Apple Account." \
+          "Then: brew bundle install --file $brewfile_name"
       fi
     fi
   done
 fi
 
-# --- Config links ----------------------------------------------------------------
+# --- Config links -------------------------------------------------------------
 # Each line: <path in this repo> <link location>
+rscottlundgren_key=github_rscottlundgren_auth_id_ed25519.pub
+studioelif_key=github_studioelif_auth_id_ed25519.pub
 links="
 profiles/common/zsh/zshrc               $HOME/.zshrc
 profiles/common/zsh/zprofile            $HOME/.zprofile
@@ -119,8 +137,8 @@ profiles/common/git/gitconfig           $HOME/.gitconfig
 profiles/common/git/ignore              $HOME/.config/git/ignore
 profiles/common/gh/config.yml           $HOME/.config/gh/config.yml
 profiles/common/ssh/config              $HOME/.ssh/config
-profiles/common/ssh/github_rscottlundgren_auth_id_ed25519.pub $HOME/.ssh/github_rscottlundgren_auth_id_ed25519.pub
-profiles/common/ssh/github_studioelif_auth_id_ed25519.pub     $HOME/.ssh/github_studioelif_auth_id_ed25519.pub
+profiles/common/ssh/$rscottlundgren_key $HOME/.ssh/$rscottlundgren_key
+profiles/common/ssh/$studioelif_key     $HOME/.ssh/$studioelif_key
 "
 
 link() {
@@ -150,7 +168,7 @@ if ! skipped links; then
   fi
 fi
 
-# --- Toolchains outside the Brewfile ------------------------------------------------
+# --- Toolchains outside the Brewfile ------------------------------------------
 if ! skipped toolchains; then
   step "Rust (rustup)"
   rustup_bin="$(brew --prefix 2>/dev/null || echo /opt/homebrew)/opt/rustup/bin"
@@ -161,7 +179,8 @@ if ! skipped toolchains; then
     else
       run rustup default stable
     fi
-    if rustup component list --installed 2>/dev/null | grep -q '^rust-analyzer'; then
+    if rustup component list --installed 2>/dev/null |
+      grep -q '^rust-analyzer'; then
       note "rust-analyzer installed"
     else
       run rustup component add rust-analyzer
@@ -173,11 +192,14 @@ if ! skipped toolchains; then
   step "Node (nvm) and pnpm (corepack)"
   export NVM_DIR="$HOME/.nvm"
   if [ ! -s "$NVM_DIR/nvm.sh" ]; then
-    # nvm's installer; PROFILE=/dev/null because the tracked zshrc already loads nvm
-    run env PROFILE=/dev/null bash -c 'curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash'
+    # nvm's installer; PROFILE=/dev/null because the tracked zshrc already
+    # loads nvm
+    nvm_installer="https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh"
+    run env PROFILE=/dev/null bash -c "curl -fsSL $nvm_installer | bash"
   fi
   if [ -s "$NVM_DIR/nvm.sh" ]; then
-    set +u # nvm.sh isn't written for `set -u`
+    # nvm.sh isn't written for `set -u`
+    set +u
     # shellcheck disable=SC1091
     . "$NVM_DIR/nvm.sh"
     if nvm ls default >/dev/null 2>&1; then
@@ -185,7 +207,8 @@ if ! skipped toolchains; then
     else
       run nvm install --lts
     fi
-    if command -v pnpm >/dev/null && [[ "$(command -v pnpm)" == "$NVM_DIR"/* ]]; then
+    if command -v pnpm >/dev/null &&
+      [[ "$(command -v pnpm)" == "$NVM_DIR"/* ]]; then
       note "pnpm enabled"
     else
       run corepack enable pnpm
@@ -194,44 +217,51 @@ if ! skipped toolchains; then
   fi
 fi
 
-# --- Neovim plugins at the lockfile's revisions -----------------------------------------
+# --- Neovim plugins at the lockfile's revisions -------------------------------
 if ! skipped nvim; then
   step "Neovim plugins (nvim-pack-lock.json)"
   if command -v nvim >/dev/null && [ -e "$HOME/.config/nvim" ]; then
-    # The first start installs missing plugins; update syncs installed ones to the lockfile
-    run nvim --headless "+lua vim.pack.update(nil, { target = 'lockfile', force = true })" +qa
+    # The first start installs missing plugins; update syncs installed ones to
+    # the lockfile
+    run nvim --headless \
+      "+lua vim.pack.update(nil, { target = 'lockfile', force = true })" +qa
   else
     note "nvim or ~/.config/nvim missing; skipping"
   fi
 fi
 
-# --- Coding-agent config -------------------------------------------------------------------
+# --- Coding-agent config ------------------------------------------------------
 if ! skipped agents; then
   step "Coding-agent config (agent-config, context)"
   arguments=(--profile "$profile")
   $dry_run && arguments+=(--dry-run)
   if ! "$repo/profiles/common/agents/setup.sh" "${arguments[@]}"; then
-    manual+=("Coding-agent config: sign in with \`gh auth login\`, then rerun with --skip xcode,brew,links,toolchains,nvim")
+    manual_step "Coding-agent config: sign in with \`gh auth login\`, then" \
+      "rerun with --skip xcode,brew,links,toolchains,nvim"
   fi
 fi
 
-# --- Personal tools (personal profile only) ------------------------------------------------
+# --- Personal tools (personal profile only) -----------------------------------
 if [ "$profile" = personal ] && ! skipped tools; then
   step "Personal tools (fidgot-personal)"
   arguments=()
   $dry_run && arguments+=(--dry-run)
-  if ! "$repo/profiles/personal/tools/setup.sh" ${arguments[@]+"${arguments[@]}"}; then
-    manual+=("Personal tools: sign in with \`gh auth login\`, then rerun with --skip xcode,brew,links,toolchains,nvim,agents")
+  if ! "$repo/profiles/personal/tools/setup.sh" \
+    ${arguments[@]+"${arguments[@]}"}; then
+    manual_step "Personal tools: sign in with \`gh auth login\`, then rerun" \
+      "with --skip xcode,brew,links,toolchains,nvim,agents"
   fi
 fi
 
-# --- Things that need a person -------------------------------------------------------------
-manual+=(
-  "Open OrbStack once to finish its setup; for Kubernetes: orb start k8s"
-  "Sign in to 1Password and turn on its SSH agent (GitHub over SSH and commit signing use it)"
-  "GitHub CLI: gh auth login (once per account)"
-  "Git identities: create ~/.config/git/<identity>.gitconfig and allowed_signers (see profiles/common/git/README.md)"
-  "Machine-specific settings: ~/.zshrc.local, ~/.config/git/local.gitconfig, Neovim's lua/custom/local.lua"
-)
+# --- Things that need a person ------------------------------------------------
+manual_step "Open OrbStack once to finish its setup; for Kubernetes:" \
+  "orb start k8s"
+manual_step "Sign in to 1Password and turn on its SSH agent (GitHub over SSH" \
+  "and commit signing use it)"
+manual_step "GitHub CLI: gh auth login (once per account)"
+manual_step "Git identities: create ~/.config/git/<identity>.gitconfig and" \
+  "allowed_signers (see profiles/common/git/README.md)"
+manual_step "Machine-specific settings: ~/.zshrc.local, Neovim's" \
+  "lua/custom/local.lua and ~/.config/git/local.gitconfig"
 step "Left for you"
 for task in "${manual[@]}"; do note "- $task"; done

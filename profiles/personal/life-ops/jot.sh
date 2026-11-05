@@ -6,13 +6,15 @@ jot() {
     echo "usage: jot <what happened>"
     return 1
   fi
-  local file clock entry temp_file
+  local file clock entry temp_file insert_entry
   file="$(_lo_ensure_today)"
   clock="$(date +%H:%M)"
   entry="- $clock $*"
   if grep -q '^## Log$' "$file"; then
     temp_file="$(mktemp)"
-    if awk -v entry="$entry" '{print} /^## Log$/ && !inserted {print entry; inserted=1}' "$file" >"$temp_file"; then
+    # awk: print every line, and the entry once, right after "## Log"
+    insert_entry='{print} /^## Log$/ && !inserted {print entry; inserted=1}'
+    if awk -v entry="$entry" "$insert_entry" "$file" >"$temp_file"; then
       mv "$temp_file" "$file" || {
         printf '%s\n' "$entry" >>"$file"
         rm -f "$temp_file"

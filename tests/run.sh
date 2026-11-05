@@ -26,12 +26,15 @@ done
 
 status=0
 # -count=1: the results depend on the machine, so never reuse cached ones
-go test -count=1 ${tags[@]+"${tags[@]}"} ${arguments[@]+"${arguments[@]}"} ./... || status=$?
+go test -count=1 ${tags[@]+"${tags[@]}"} \
+  ${arguments[@]+"${arguments[@]}"} ./... || status=$?
 
 if command -v brew >/dev/null; then
-  if ! missing="$(brew bundle check --verbose --file ../profiles/common/Brewfile 2>&1)"; then
+  brewfile=../profiles/common/Brewfile
+  if ! missing="$(brew bundle check --verbose --file "$brewfile" 2>&1)"; then
     echo
-    echo "warning: the common Brewfile isn't fully installed (not a test failure):"
+    echo "warning: the common Brewfile isn't fully installed" \
+      "(not a test failure):"
     grep '→' <<<"$missing" | sed 's/^/  /' || true
   fi
 fi

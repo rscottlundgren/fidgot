@@ -59,8 +59,10 @@ clone_or_update() {
     run git -C "$directory" pull --ff-only --quiet
   else
     # The repo is private; over HTTPS, git authenticates through gh
-    if [[ "$remote_base" == https://github.com/* ]] && ! gh auth status >/dev/null 2>&1; then
-      echo "$name is private: sign in first with \`gh auth login\` (git uses gh for GitHub over HTTPS)" >&2
+    if [[ "$remote_base" == https://github.com/* ]] &&
+      ! gh auth status >/dev/null 2>&1; then
+      echo "$name is private: sign in first with \`gh auth login\`" \
+        "(git uses gh for GitHub over HTTPS)" >&2
       exit 1
     fi
     say "$name: cloning into $directory"
