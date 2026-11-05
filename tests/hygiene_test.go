@@ -14,7 +14,7 @@ func TestShellScripts(t *testing.T) {
 	need(t, "shellcheck", "shfmt")
 	scripts := tracked(t, "*.sh")
 	t.Run("shellcheck", func(t *testing.T) {
-		// -s bash: the life-ops files have no shebang (they're sourced)
+		// -s bash: every script is bash (CONVENTIONS.md), shebang or not
 		mustSucceed(t, cmd{name: "shellcheck", args: append([]string{"-s", "bash"}, scripts...)})
 	})
 	t.Run("shfmt", func(t *testing.T) {

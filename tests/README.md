@@ -32,8 +32,6 @@ including rust-analyzer from rustup and lua-language-server from Mason.
 | `nvim_test.go`           | Headless Neovim with the repo's config: clean start with every plugin loaded, `:checkhealth kickstart`, spell checking on for prose and off for code, Lua and Markdown format on save                       |
 | `languages_slow_test.go` | `--slow` only: for each language module, its fixture gets the language server, the expected diagnostic and the expected formatting; lua-language-server finds no warnings in the Neovim config              |
 
-life-ops isn't tested yet.
-
 ## How they're built
 
 - Each Neovim check is a Lua script in `nvim/`, run by `nvim_test.go` in
