@@ -61,7 +61,7 @@ Config is grouped into profiles by which machines use it:
 | Profile              | For                               | Contains                                                    |
 | -------------------- | --------------------------------- | ----------------------------------------------------------- |
 | `profiles/common/`   | Every machine (personal and work) | Brewfile, zsh, git, gh, ssh, Neovim, Ghostty, Starship, Zed |
-| `profiles/personal/` | The personal machine only         | Brewfile, `life-ops` scripts, personal tools setup          |
+| `profiles/personal/` | The personal machine only         | Brewfile, personal tools setup                              |
 
 Config starts in `common/`. Something moves to a machine-specific profile only
 when it has to differ between machines; a work profile would sit next to
