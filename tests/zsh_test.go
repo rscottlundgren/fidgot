@@ -87,3 +87,53 @@ func TestZshEls(t *testing.T) {
 		t.Errorf("els -la ran %q, want %q", got, want)
 	}
 }
+
+func TestZshBrewFunctions(t *testing.T) {
+	home := zshHome(t)
+	// A stand-in brew, first on PATH (zshrc adds ~/.local/bin), that logs each
+	// call and fails the subcommand named in $BREW_FAIL
+	bin := filepath.Join(home, ".local/bin")
+	if err := os.MkdirAll(bin, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	stub := "#!/bin/sh\necho \"brew $*\" >>\"$HOME/brew.log\"\n[ \"$1\" != \"$BREW_FAIL\" ]\n"
+	if err := os.WriteFile(filepath.Join(bin, "brew"), []byte(stub), 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	tests := []struct {
+		command, fail string
+		code          int
+		calls         []string
+	}{
+		{"brew-in wget jq", "", 0, []string{"doctor", "update", "upgrade", "install wget jq", "cleanup", "doctor"}},
+		{"brew-un wget", "", 0, []string{"doctor", "update", "upgrade", "uninstall wget", "cleanup", "doctor"}},
+		{"brew-up", "", 0, []string{"doctor", "update", "upgrade", "cleanup", "doctor"}},
+		{"brew-in", "", 2, nil},
+		{"brew-un", "", 2, nil},
+		{"brew-in wget", "update", 1, []string{"doctor", "update"}},
+		{"brew-in wget", "install", 1, []string{"doctor", "update", "upgrade", "install wget"}},
+		{"brew-in wget", "upgrade", 0, []string{"doctor", "update", "upgrade", "install wget", "cleanup", "doctor"}},
+		{"brew-up", "doctor", 0, []string{"doctor", "update", "upgrade", "cleanup", "doctor"}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.command+"/fail="+tt.fail, func(t *testing.T) {
+			log := filepath.Join(home, "brew.log")
+			os.Remove(log)
+			env := append(baseEnv(home), "BREW_FAIL="+tt.fail)
+			r := run(t, cmd{name: "zsh", args: []string{"-l", "-i", "-c", tt.command}, env: env})
+			if r.code != tt.code {
+				t.Errorf("exit %d, want %d\nstderr:\n%s", r.code, tt.code, r.stderr)
+			}
+			var calls []string
+			if data, err := os.ReadFile(log); err == nil {
+				for _, line := range strings.Split(strings.TrimSpace(string(data)), "\n") {
+					calls = append(calls, strings.TrimPrefix(line, "brew "))
+				}
+			}
+			if !slices.Equal(calls, tt.calls) {
+				t.Errorf("brew calls %q, want %q", calls, tt.calls)
+			}
+		})
+	}
+}
