@@ -6,23 +6,23 @@ jot() {
     echo "usage: jot <what happened>"
     return 1
   fi
-  local f ts entry tmp
-  f="$(_lo_ensure_today)"
-  ts="$(date +%H:%M)"
-  entry="- $ts $*"
-  if grep -q '^## Log$' "$f"; then
-    tmp="$(mktemp)"
-    if awk -v e="$entry" '{print} /^## Log$/ && !d {print e; d=1}' "$f" >"$tmp"; then
-      mv "$tmp" "$f" || {
-        printf '%s\n' "$entry" >>"$f"
-        rm -f "$tmp"
+  local file clock entry temp_file
+  file="$(_lo_ensure_today)"
+  clock="$(date +%H:%M)"
+  entry="- $clock $*"
+  if grep -q '^## Log$' "$file"; then
+    temp_file="$(mktemp)"
+    if awk -v entry="$entry" '{print} /^## Log$/ && !inserted {print entry; inserted=1}' "$file" >"$temp_file"; then
+      mv "$temp_file" "$file" || {
+        printf '%s\n' "$entry" >>"$file"
+        rm -f "$temp_file"
       }
     else
-      printf '%s\n' "$entry" >>"$f"
-      rm -f "$tmp"
+      printf '%s\n' "$entry" >>"$file"
+      rm -f "$temp_file"
     fi
   else
-    printf '%s\n' "$entry" >>"$f"
+    printf '%s\n' "$entry" >>"$file"
   fi
-  echo "lo: logged → $(basename "$f")"
+  echo "lo: logged → $(basename "$file")"
 }

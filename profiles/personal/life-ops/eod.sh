@@ -1,7 +1,7 @@
 # End of day: stage ONLY log/, commit with a content-free message, sync.
 eod() {
-  local d
-  d="$(date +%Y-%m-%d)"
+  local log_date
+  log_date="$(date +%Y-%m-%d)"
 
   if [ -z "$(git -C "$LIFEOPS" status --porcelain -- log/)" ]; then
     echo "lo: no log changes to commit"
@@ -10,7 +10,7 @@ eod() {
 
   git -C "$LIFEOPS" add -- log/ || return 1
 
-  if ! git -C "$LIFEOPS" commit -m "log: $d update"; then
+  if ! git -C "$LIFEOPS" commit -m "log: $log_date update"; then
     echo "lo: commit failed — most likely the 1Password SSH signing agent"
     echo "    (signing key in the Development vault / agent.toml). Fix that,"
     echo "    then rerun: eod"
@@ -28,5 +28,5 @@ eod() {
     return 1
   fi
 
-  git -C "$LIFEOPS" push --quiet && echo "lo: pushed log for $d"
+  git -C "$LIFEOPS" push --quiet && echo "lo: pushed log for $log_date"
 }
