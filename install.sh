@@ -91,16 +91,16 @@ if ! skipped brew; then
 
   brewfiles=("$repo/profiles/common/Brewfile")
   [ "$profile" = personal ] && brewfiles+=("$repo/profiles/personal/Brewfile")
-  for f in "${brewfiles[@]}"; do
-    step "Brewfile ${f#"$repo"/}"
-    if command -v brew >/dev/null && brew bundle check --file "$f" >/dev/null 2>&1; then
+  for brewfile in "${brewfiles[@]}"; do
+    step "Brewfile ${brewfile#"$repo"/}"
+    if command -v brew >/dev/null && brew bundle check --file "$brewfile" >/dev/null 2>&1; then
       note "everything installed"
     else
       # Install what's missing; don't upgrade what's already there. App Store
       # apps (the mas lines) fail until the App Store app is signed in, so a
       # failure here is left for you instead of stopping the install.
-      if ! HOMEBREW_BUNDLE_NO_UPGRADE=1 run brew bundle install --file "$f"; then
-        manual+=("Brewfile ${f#"$repo"/}: some installs failed; App Store apps need the App Store app signed in to an Apple Account. Then: brew bundle install --file ${f#"$repo"/}")
+      if ! HOMEBREW_BUNDLE_NO_UPGRADE=1 run brew bundle install --file "$brewfile"; then
+        manual+=("Brewfile ${brewfile#"$repo"/}: some installs failed; App Store apps need the App Store app signed in to an Apple Account. Then: brew bundle install --file ${brewfile#"$repo"/}")
       fi
     fi
   done
@@ -124,24 +124,24 @@ profiles/common/ssh/github_studioelif_auth_id_ed25519.pub     $HOME/.ssh/github_
 "
 
 link() {
-  local src="$repo/$1" dest="$2"
-  if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$src" ]; then
-    note "ok      ${dest/#$HOME/~}"
+  local target="$repo/$1" link_name="$2"
+  if [ -L "$link_name" ] && [ "$(readlink "$link_name")" = "$target" ]; then
+    note "ok      ${link_name/#$HOME/~}"
     return
   fi
-  if [ -e "$dest" ] || [ -L "$dest" ]; then
-    note "backup  ${dest/#$HOME/~} -> ${dest/#$HOME/~}.bak-$timestamp"
-    run mv "$dest" "$dest.bak-$timestamp"
+  if [ -e "$link_name" ] || [ -L "$link_name" ]; then
+    note "backup  ${link_name/#$HOME/~} -> ${link_name/#$HOME/~}.bak-$timestamp"
+    run mv "$link_name" "$link_name.bak-$timestamp"
   fi
-  note "link    ${dest/#$HOME/~} -> ${src/#$HOME/~}"
-  run mkdir -p "$(dirname "$dest")"
-  run ln -s "$src" "$dest"
+  note "link    ${link_name/#$HOME/~} -> ${target/#$HOME/~}"
+  run mkdir -p "$(dirname "$link_name")"
+  run ln -s "$target" "$link_name"
 }
 
 if ! skipped links; then
   step "Config links"
-  while read -r src dest; do
-    [ -n "$src" ] && link "$src" "$dest"
+  while read -r repo_path link_name; do
+    [ -n "$repo_path" ] && link "$repo_path" "$link_name"
   done <<<"$links"
   # ~/.ssh holds private keys: only its owner should be able to read it
   if [ -d "$HOME/.ssh" ] && [ "$(stat -f %Lp "$HOME/.ssh")" != 700 ]; then
@@ -208,9 +208,9 @@ fi
 # --- Coding-agent config -------------------------------------------------------------------
 if ! skipped agents; then
   step "Coding-agent config (agent-config, context)"
-  args=(--profile "$profile")
-  $dry_run && args+=(--dry-run)
-  if ! "$repo/profiles/common/agents/setup.sh" "${args[@]}"; then
+  arguments=(--profile "$profile")
+  $dry_run && arguments+=(--dry-run)
+  if ! "$repo/profiles/common/agents/setup.sh" "${arguments[@]}"; then
     manual+=("Coding-agent config: sign in with \`gh auth login\`, then rerun with --skip xcode,brew,links,toolchains,nvim")
   fi
 fi
@@ -218,9 +218,9 @@ fi
 # --- Personal tools (personal profile only) ------------------------------------------------
 if [ "$profile" = personal ] && ! skipped tools; then
   step "Personal tools (fidgot-personal)"
-  args=()
-  $dry_run && args+=(--dry-run)
-  if ! "$repo/profiles/personal/tools/setup.sh" ${args[@]+"${args[@]}"}; then
+  arguments=()
+  $dry_run && arguments+=(--dry-run)
+  if ! "$repo/profiles/personal/tools/setup.sh" ${arguments[@]+"${arguments[@]}"}; then
     manual+=("Personal tools: sign in with \`gh auth login\`, then rerun with --skip xcode,brew,links,toolchains,nvim,agents")
   fi
 fi
@@ -234,4 +234,4 @@ manual+=(
   "Machine-specific settings: ~/.zshrc.local, ~/.config/git/local.gitconfig, Neovim's lua/custom/local.lua"
 )
 step "Left for you"
-for m in "${manual[@]}"; do note "- $m"; done
+for task in "${manual[@]}"; do note "- $task"; done

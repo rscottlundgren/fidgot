@@ -67,15 +67,12 @@ file, since every file they source (nvm, 1Password's plugins, OrbStack,
 # shellcheck shell=bash disable=SC1090,SC1091
 ```
 
-Variables use full words (`directory`, `file`), and variables inside a function
-are `local`. Two kinds of names stay as they are:
-
-- Names another tool reads, such as `NVM_DIR`, `JAVA_HOME` and
-  `HOMEBREW_PREFIX`.
-- zsh's special lowercase parameters, which a full word can collide with: `path`
-  is tied to `PATH` (so `local path` empties `PATH` inside that function), and
-  `status`, `options`, `functions`, `commands` and `aliases` are taken too. Pick
-  another word, e.g. `target` for a path.
+Variable names follow the repo-wide rule in the
+[root README](../../../README.md#shell-code). On top of it, zsh has special
+lowercase parameters that a full word can collide with: `path` is tied to `PATH`
+(so `local path` empties `PATH` inside that function), and `status`, `options`,
+`functions`, `commands` and `aliases` are taken too. Pick another word, e.g.
+`target` for a path.
 
 ## Shell functions
 

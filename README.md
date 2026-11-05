@@ -106,6 +106,23 @@ Settings that apply to working on this repo itself, at the repo root:
   Neovim runtime when the whole repo is open in an editor such as Zed (see
   [Neovim](profiles/common/nvim/README.md)).
 
+### Shell code
+
+The scripts (`*.sh`, bash) and the zsh config share one naming rule: variables
+use full words, so `brewfile`, `directory`, `arguments` and `task`, not `f`,
+`dir`, `args` and `m`. Variables inside a function are `local`. Pick a name for
+what the value is: `install.sh`'s `link()` uses `target` and `link_name`, the
+terms `ln -s <target> <link_name>` uses.
+
+Names another tool reads stay as they are, such as `NVM_DIR`, `JAVA_HOME`,
+`HOMEBREW_PREFIX` and `HOMEBREW_BUNDLE_NO_UPGRADE`. Avoid names that are also
+shell commands or keywords, such as `source`, `test` or `local`: they're legal
+as variable names, but confusing next to the command.
+
+The zsh config has more rules of its own (section rules, 80 columns, the
+shellcheck line, zsh's special parameters): see its
+[Conventions](profiles/common/zsh/README.md#conventions).
+
 Tests for the scripts, shell and Neovim config are in
 [`tests/`](tests/README.md): run `tests/run.sh` before committing (it includes
 the Markdown checks below), or `tests/run.sh --slow` after changing a language
