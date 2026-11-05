@@ -44,20 +44,51 @@ func TestZshShellcheck(t *testing.T) {
 	mustSucceed(t, cmd{name: "shellcheck", args: zshFiles(t)})
 }
 
-// The zsh config stays within 80 columns (profiles/common/zsh/README.md,
-// Conventions).
-func TestZshLineLength(t *testing.T) {
-	for _, f := range zshFiles(t) {
-		data, err := os.ReadFile(filepath.Join(root, f))
-		if err != nil {
-			t.Fatal(err)
-		}
-		for i, line := range strings.Split(string(data), "\n") {
-			if n := utf8.RuneCountInString(line); n > 80 {
+// shellFiles is every shell file CONVENTIONS.md covers: the scripts and the
+// zsh config.
+func shellFiles(t *testing.T) []string {
+	t.Helper()
+	return append(tracked(t, "*.sh"), zshFiles(t)...)
+}
+
+// Shell files stay within 80 columns (CONVENTIONS.md). A line with a URL is
+// the one exception: a URL can't be split.
+func TestShellLineLength(t *testing.T) {
+	for _, f := range shellFiles(t) {
+		for i, line := range lines(t, f) {
+			if n := utf8.RuneCountInString(line); n > 80 && !strings.Contains(line, "://") {
 				t.Errorf("%s:%d is %d columns, over 80", f, i+1, n)
 			}
 		}
 	}
+}
+
+// Section rules run to 80 columns, subsection rules to 60 (CONVENTIONS.md).
+func TestShellRules(t *testing.T) {
+	for _, f := range shellFiles(t) {
+		for i, line := range lines(t, f) {
+			want := 0
+			switch {
+			case strings.HasPrefix(line, "# ------ "):
+				want = 60
+			case strings.HasPrefix(line, "# --- "):
+				want = 80
+			}
+			if n := utf8.RuneCountInString(line); want != 0 && n != want {
+				t.Errorf("%s:%d: rule is %d columns, want %d", f, i+1, n, want)
+			}
+		}
+	}
+}
+
+// lines returns a repo file's lines.
+func lines(t *testing.T, f string) []string {
+	t.Helper()
+	data, err := os.ReadFile(filepath.Join(root, f))
+	if err != nil {
+		t.Fatal(err)
+	}
+	return strings.Split(string(data), "\n")
 }
 
 func TestLuaFormatting(t *testing.T) {
