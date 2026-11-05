@@ -25,7 +25,7 @@ including rust-analyzer from rustup and lua-language-server from Mason.
 
 | File                     | Checks                                                                                                                                                                                         |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `hygiene_test.go`        | shellcheck and shfmt on the scripts, `zsh -n` on the zsh config, stylua, gofmt, Prettier and markdownlint                                                                                      |
+| `hygiene_test.go`        | shellcheck and shfmt on the scripts, `zsh -n` and shellcheck on the zsh config, stylua, gofmt, Prettier and markdownlint                                                                       |
 | `install_test.go`        | `install.sh` in an empty temporary `HOME` (links step only): every link made, a second run changes nothing, a file in the way is backed up, `--dry-run` changes nothing, bad arguments exit 2  |
 | `agents_test.go`         | `agents/setup.sh`: arguments, and a dry run doesn't clone                                                                                                                                      |
 | `zsh_test.go`            | A login shell with the tracked config: nothing on stderr, the expected `PATH` entries, `~/.zshrc.local` loaded only when present, `els` passes its flags to eza                                |

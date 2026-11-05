@@ -1,8 +1,11 @@
 package tests
 
 import (
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
+	"unicode/utf8"
 )
 
 // The linters and formatters the repo's files are kept clean with.
@@ -20,10 +23,40 @@ func TestShellScripts(t *testing.T) {
 	})
 }
 
+// The zsh config: zshrc, zprofile and the functions/*.zsh files it sources.
+func zshFiles(t *testing.T) []string {
+	t.Helper()
+	return tracked(t, "zshrc", "zprofile", "*.zsh")
+}
+
 func TestZshSyntax(t *testing.T) {
 	need(t, "zsh")
-	for _, f := range []string{"profiles/common/zsh/zshrc", "profiles/common/zsh/zprofile"} {
+	for _, f := range zshFiles(t) {
 		mustSucceed(t, cmd{name: "zsh", args: []string{"-n", f}})
+	}
+}
+
+// shellcheck doesn't know zsh, so the zsh config is written in syntax bash also
+// parses and says `# shellcheck shell=bash`; this keeps it that way, matching
+// what bash-language-server shows in the editor.
+func TestZshShellcheck(t *testing.T) {
+	need(t, "shellcheck")
+	mustSucceed(t, cmd{name: "shellcheck", args: zshFiles(t)})
+}
+
+// The zsh config stays within 80 columns (profiles/common/zsh/README.md,
+// Conventions).
+func TestZshLineLength(t *testing.T) {
+	for _, f := range zshFiles(t) {
+		data, err := os.ReadFile(filepath.Join(root, f))
+		if err != nil {
+			t.Fatal(err)
+		}
+		for i, line := range strings.Split(string(data), "\n") {
+			if n := utf8.RuneCountInString(line); n > 80 {
+				t.Errorf("%s:%d is %d columns, over 80", f, i+1, n)
+			}
+		}
 	}
 }
 
